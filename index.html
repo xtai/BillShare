@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BillShare</title>
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/index.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -58,7 +62,7 @@
                       <button type="button" class="btn btn-default" onclick="togglePrepos();" id="preposition">for</button>
                     </div>
                     <div class="btn-group btn-group-lg" role="group">
-                      <button type="button" class="btn btn-default" onclick="toggleUserB();" id="UserB">Xiaoyu</button>
+                      <button type="button" class="btn btn-default" onclick="toggleUserB();" id="UserB">house</button>
                     </div>
                   </div>
                 </div>
@@ -90,56 +94,50 @@
                     <tr>
                       <th></th>
                       <th></th>
-                      <th>Zheng</th>
-                      <th>Xiaoyu</th>
+                      <th class="text-right">Zheng</th>
+                      <th class="text-right">Xiaoyu</th>
                       <th></th>
-                      <th></th> 
-                      <th></th> 
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</th>
+                      <td>05/25/2015</td>
                       <td><b>Zheng</b> paid <b><u>$500.00</u></b> to <b>Xiaoyu</b></td>
-                      <td>-$500.00</td>
-                      <td></td>
-                      <td>05/25/2015</td>
-                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-right">-$500.00</td>
+                      <td class="text-right"></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
-                      <td>2</th>
+                      <td>05/25/2015</td>
                       <td><b>Xiaoyu</b> paid <b><u>$1200.00</u></b> rent for <b>the house</b></td>
-                      <td>$600.00</td>
-                      <td></td>
-                      <td>05/25/2015</td>
-                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-right">$600.00</td>
+                      <td class="text-right"></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
-                      <td>3</th>
+                      <td>05/17/2015</td>
                       <td><b>Zheng</b> paid <b><u>$600.00</u></b> rent for <b>the house</b></td>
-                      <td></td>
-                      <td>$300.00</td>
-                      <td>05/17/2015</td>
-                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-right"></td>
+                      <td class="text-right">$300.00</td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
-                      <td>4</th>
-                      <td><b>Zheng</b> paid <b><u>$200.00</u></b> dinner for <b>Xiaoyu</b></td>
-                      <td></td>
-                      <td>$200.00</td>
                       <td>05/17/2015</td>
-                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td><b>Zheng</b> paid <b><u>$200.00</u></b> dinner for <b>Xiaoyu</b></td>
+                      <td class="text-right"></td>
+                      <td class="text-right">$200.00</td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
                       <th></th>
-                      <td><b>Total</b></td>
-                      <td>$100.00</td>
-                      <td>$500.00</td>
-                      <td></td>
+                      <td class="text-right"><b>Total</b></td>
+                      <td class="text-right">$100.00</td>
+                      <td class="text-right">$500.00</td>
                       <td></td>
                       <td></td>
                     </tr>

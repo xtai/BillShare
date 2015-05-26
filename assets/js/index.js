@@ -1,6 +1,6 @@
 var currencyID = 0;
 var userAID = 0;
-var userBID = 1;
+var userBID = 2;
 var preposition = "for";
 var record = {
   "RecordID": 0,
