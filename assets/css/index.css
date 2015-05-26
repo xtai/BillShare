@@ -1,7 +1,40 @@
 body {
+  padding-top: 5px;
+  //background-color: rgb(250,250,250);
+}
+body > div > div > div > hr {
+  margin-right: -10px;
+  margin-left: -10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.inputs > div {
+  padding: 5px;
+}
+.jumbotron{
+  margin-right: -10px;
+  margin-left: -10px;
+  margin-bottom: 15px;
+  padding: 10px 10px 1px 10px;
+}
+.jumbotron p{
+  padding: 0px;
+}
+.add-btn{
+  padding-top: 5px;
+  margin-left: -10px;
+}
+.footer{
   padding-top: 20px;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+.records .panel{
+  margin: 5px -10px 20px -10px;
+}
+@media (min-width: 768px) {
+  body{
+    padding-top: 50px;
+  }
+  .jumbotron{
+    padding: 30px 10px 20px 10px;
+  }
 }

@@ -14,10 +14,192 @@
   </head>
   <body>
     <div class="container">
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+          <div class="jumbotron">
+            <p>As for <abbr title="attribute">05/26/2015</abbr>, Zheng owes Xiaoyu <abbr title="attribute">$100</abbr>.</p>
+            <p><a class="btn btn-primary" href="#" role="button">I paid back!</a> <a class="btn btn-default" href="#" role="button">I paid rent!</a></p>
+          </div>
+          <hr />
+        </div>
+        <div class="col-lg-10 col-lg-offset-1 main">
+          <div class="row inputs">
+            <div class="col-md-3">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group btn-group-lg" role="group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Zheng <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="active"><a href="#">Zheng</a></li>
+                    <li><a href="#">Xiaoyu</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                  <button type="button" class="btn btn-default" disabled="true">paid</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group input-group-lg">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">$ <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="active"><a href="#">$</a></li>
+                    <li><a href="#">¥</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+                <input type="text" class="form-control" aria-label="..." placeholder="100,000">
+              </div>
+            </div>
+            <div class="col-md-2">
+                <input type="email" class="form-control input-lg" id="things" placeholder="dinner">
+            </div>
+            <div class="col-md-3">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group btn-group-lg" role="group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">for <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="active"><a href="#">for</a></li>
+                    <li><a href="#">to</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Xiaoyu <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Zheng</a></li>
+                    <li class="active"><a href="#">Xiaoyu</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">house</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 hidden-lg">
+              <button type="button" class="btn btn-success btn-lg btn-block">Add</button>
+            </div>
+          </div>
+          <hr />
+        </div>
+        <div class="visible-lg col-md-1 add-btn">
+          <button type="button" class="btn btn-success btn-lg">Add</button>
+        </div>
+        <div class="col-lg-10 col-lg-offset-1 records">
+          <div class="month panel panel-default">
+            <div class="panel-heading" onclick="$('#collapseBody052015').collapse('toggle')">
+              <h3 class="panel-title">May, 2015</h3>
+            </div>
+            <div id="collapseBody052015" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
+              </div>
+              <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
+                  <td>05/25/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
+                  <td>05/17/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="month panel panel-default">
+            <div class="panel-heading" onclick="$('#collapseBody082015').collapse('toggle')">
+              <h3 class="panel-title">May, 2015</h3>
+            </div>
+            <div id="collapseBody082015" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
+              </div>
+              <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
+                  <td>05/25/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
+                  <td>05/17/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="month panel panel-default">
+            <div class="panel-heading" onclick="$('#collapseBody062015').collapse('toggle')">
+              <h3 class="panel-title">May, 2015</h3>
+            </div>
+            <div id="collapseBody062015" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
+              </div>
+              <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
+                  <td>05/25/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
+                  <td>05/17/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="month panel panel-default">
+            <div class="panel-heading" onclick="$('#collapseBody072015').collapse('toggle')">
+              <h3 class="panel-title">May, 2015</h3>
+            </div>
+            <div id="collapseBody072015" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
+              </div>
+              <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
+                  <td>05/25/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
+                  <td>05/17/2015</td>
+                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+
+          <hr />
+        </div>
       </div>
+      <p class="text-center footer">© 2015 BillShare. Xiaoyu Tai, Zheng Yan.</p>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
