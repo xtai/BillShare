@@ -2,6 +2,10 @@ body {
   padding-top: 5px;
   //background-color: rgb(250,250,250);
 }
+.btn:focus, .btn:active:focus, .btn.active:focus{
+  outline-color: transparent;
+  outline-style: none;
+}
 body > div > div > div > hr {
   margin-right: -10px;
   margin-left: -10px;
