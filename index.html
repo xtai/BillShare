@@ -15,169 +15,142 @@
   <body>
     <div class="container">
       <div class="row">
+        <!-- Header, total owes with some quick options -->
         <div class="col-lg-10 col-lg-offset-1">
-          <div class="jumbotron">
-            <p>As for <abbr title="attribute">05/26/2015</abbr>, Zheng owes Xiaoyu <abbr title="attribute">$100</abbr>.</p>
+          <div class="alert alert-info header" role="alert">
+            <p>As for <abbr title="attribute">05/26/2015</abbr>, Xiaoyu owes Zheng <abbr title="attribute">$400</abbr>.</p>
             <p><a class="btn btn-primary" href="#" role="button">I paid back!</a> <a class="btn btn-default" href="#" role="button">I paid rent!</a></p>
           </div>
           <hr />
         </div>
+        <!-- Inputs group with add button -->
         <div class="col-lg-10 col-lg-offset-1 main">
-          <div class="row inputs">
-            <div class="col-sm-6 col-md-3">
-              <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group btn-group-lg" role="group">
-                  <button type="button" class="btn btn-default" onclick="toggleUserA();" id="UserA">Zheng</button>
+          <div class="row">
+            <div class="col-sm-12 visible-sm visible-xs">
+              <button type="button" class="btn btn-default btn-lg btn-block" onclick="toggleInputs();" id="showHideButton">Add</button>
+            </div>
+            <div class="col-xs-12">
+              <div class="row collapse in" id="collapseInputs">
+                <div class="inputs col-sm-6 col-md-3">
+                  <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group btn-group-lg" role="group">
+                      <button type="button" class="btn btn-default" onclick="toggleUserA();" id="UserA">Zheng</button>
+                    </div>
+                    <div class="btn-group btn-group-lg" role="group">
+                      <button type="button" class="btn btn-default" disabled="true">paid</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="btn-group btn-group-lg" role="group">
-                  <button type="button" class="btn btn-default" disabled="true">paid</button>
+                <div class="inputs col-sm-6 col-md-4">
+                  <div class="input-group input-group-lg">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default" onclick="toggleCurrency();" id="currency">$</button>
+                    </div><!-- /btn-group -->
+                    <input type="text" id="amount" class="form-control" placeholder="100,000.00">
+                  </div>
+                </div>
+                <div class="inputs col-sm-6 col-md-2">
+                  <input type="text" class="form-control input-lg" id="things" placeholder="dinner">
+                </div>
+                <div class="inputs col-sm-6 col-md-3">
+                  <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group btn-group-lg" role="group">
+                      <button type="button" class="btn btn-default" onclick="togglePrepos();" id="preposition">for</button>
+                    </div>
+                    <div class="btn-group btn-group-lg" role="group">
+                      <button type="button" class="btn btn-default" onclick="toggleUserB();" id="UserB">Xiaoyu</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 visible-sm visible-xs">
+                  <button type="button" class="btn btn-success btn-lg btn-block">Add</button>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="input-group input-group-lg">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-default" onclick="toggleCurrency();" id="currency">$</button>
-                </div><!-- /btn-group -->
-                <input type="text" class="form-control" placeholder="100,000">
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-2">
-                <input type="email" class="form-control input-lg" id="things" placeholder="dinner">
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group btn-group-lg" role="group">
-                  <button type="button" class="btn btn-default" onclick="togglePrepos();" id="preposition">for</button>
-                </div>
-                <div class="btn-group btn-group-lg" role="group">
-                  <button type="button" class="btn btn-default" onclick="toggleUserB();" id="UserB">Xiaoyu</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 hidden-lg">
+            <div class="col-sm-12 visible-md">
               <button type="button" class="btn btn-success btn-lg btn-block">Add</button>
             </div>
           </div>
           <hr />
         </div>
+        <!-- This add button shows when screen width is wide enough-->
         <div class="visible-lg col-md-1 add-btn">
           <button type="button" class="btn btn-success btn-lg">Add</button>
         </div>
+        <!-- Monthly records list -->
         <div class="col-lg-10 col-lg-offset-1 records">
-          <div class="month panel panel-default">
+          <div class="month panel panel-info">
             <div class="panel-heading" onclick="$('#collapse052015').collapse('toggle')">
               <h3 class="panel-title">May, 2015</h3>
             </div>
             <div id="collapse052015" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>Zheng</th>
+                      <th>Xiaoyu</th>
+                      <th></th>
+                      <th></th> 
+                      <th></th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</th>
+                      <td><b>Zheng</b> paid <b><u>$500.00</u></b> to <b>Xiaoyu</b></td>
+                      <td>-$500.00</td>
+                      <td></td>
+                      <td>05/25/2015</td>
+                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td>2</th>
+                      <td><b>Xiaoyu</b> paid <b><u>$1200.00</u></b> rent for <b>the house</b></td>
+                      <td>$600.00</td>
+                      <td></td>
+                      <td>05/25/2015</td>
+                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td>3</th>
+                      <td><b>Zheng</b> paid <b><u>$600.00</u></b> rent for <b>the house</b></td>
+                      <td></td>
+                      <td>$300.00</td>
+                      <td>05/17/2015</td>
+                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td>4</th>
+                      <td><b>Zheng</b> paid <b><u>$200.00</u></b> dinner for <b>Xiaoyu</b></td>
+                      <td></td>
+                      <td>$200.00</td>
+                      <td>05/17/2015</td>
+                      <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <td><b>Total</b></td>
+                      <td>$100.00</td>
+                      <td>$500.00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
-                  <td>05/25/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
-                  <td>05/17/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-              </tbody>
-              </table>
+            </div>
+            <div class="panel-footer">
+              <p class="text-right"><b>Xiaoyu</b> -> <b>Zheng</b> <u>$400</u> for May, 2015.</p>
             </div>
           </div>
-          <div class="month panel panel-default">
-            <div class="panel-heading" onclick="$('#collapse082015').collapse('toggle')">
-              <h3 class="panel-title">May, 2015</h3>
-            </div>
-            <div id="collapse082015" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
-              </div>
-              <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
-                  <td>05/25/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
-                  <td>05/17/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-              </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="month panel panel-default">
-            <div class="panel-heading" onclick="$('#collapse062015').collapse('toggle')">
-              <h3 class="panel-title">May, 2015</h3>
-            </div>
-            <div id="collapse062015" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
-              </div>
-              <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
-                  <td>05/25/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
-                  <td>05/17/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-              </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="month panel panel-default">
-            <div class="panel-heading" onclick="$('#collapse072015').collapse('toggle')">
-              <h3 class="panel-title">May, 2015</h3>
-            </div>
-            <div id="collapse072015" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <p><b>Zheng</b> needs to pay <b>Xiaoyu</b> $100 for May, 2015.</p>
-              </div>
-              <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><b>Xiaoyu</b> paid <b><u>$1379.00</u></b> rent for the house</td>
-                  <td>05/25/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><b>Zheng</b> paid <b><u>$660.48</u></b> rent for the house</td>
-                  <td>05/17/2015</td>
-                  <td><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                  <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                </tr>
-              </tbody>
-              </table>
-            </div>
-          </div>
-
           <hr />
         </div>
       </div>

@@ -14,10 +14,26 @@ var record = {
   "Note": "Rent of First Month, May, 2015"
 }
 
+// Change to numeric keyboard on iOS
+$("#amount").on("touchstart", function() {
+  $(this).attr("type", "number");
+});
+$("#amount").on("keydown blur", function() {
+  $(this).attr("type", "text");
+});
+
+// Show Inputs when screen width > 991px
+$(document).ready(function() {
+  if($(window).width() < 992){
+    $("#collapseInputs").collapse();
+    $("#collapseInputs").collapse("hide");
+  }
+});
+
 var toggleUserA = function(){
   switch(userAID){
-    case 0: setUserA(1); setUserB(0); break;
-    case 1: setUserA(0); setUserB(1); break;
+    case 0: setUserA(1); if(userBID != 2){setUserB(0);} break;
+    case 1: setUserA(0); if(userBID != 2){setUserB(1);} break;
     default: break;
   }
 }
@@ -32,18 +48,10 @@ var toggleCurrency = function(){
 
 var togglePrepos = function(){
   if (preposition == "for") {
-    preposition = "to";
-    if(userAID == 0){
-      setUserB(1);  
-    }else if(userAID == 1){
-      setUserB(0);
-    }
-    $("#UserB").attr("disabled", true);
+    setPrepos("to");
   }else if (preposition == "to") {
-    preposition = "for";
-    $("#UserB").removeAttr("disabled");
+    setPrepos("for");
   }
-  $("#preposition").text(preposition);
 }
 
 var toggleUserB = function(){
@@ -63,6 +71,27 @@ var toggleUserB = function(){
     setUserB(1);
   }else if(userAID == 1 && preposition == "to"){
     setUserB(0);
+  }
+}
+
+var setPrepos = function(id){
+  switch(id){
+    case "for":
+      preposition = "for";
+      $("#UserB").removeAttr("disabled");
+      $("#preposition").text(preposition);
+      break;
+    case "to":
+      preposition = "to";
+      if(userAID == 0){
+        setUserB(1);  
+      }else if(userAID == 1){
+        setUserB(0);
+      }
+      $("#UserB").attr("disabled", true);
+      $("#preposition").text(preposition);
+      break;
+    default: break;
   }
 }
 
@@ -90,3 +119,20 @@ var setCurrency = function(id){
     default: break;
   }
 }
+
+// Show inputs group on screen width < 768px
+var toggleInputs = function(){
+  $("#collapseInputs").collapse("toggle");
+  $('#collapseInputs').on('shown.bs.collapse', function () {
+    $("#showHideButton").text("Hide");
+  });
+  $('#collapseInputs').on('hidden.bs.collapse', function () {
+    $("#showHideButton").text("Add");
+  });
+}
+
+
+
+
+
+

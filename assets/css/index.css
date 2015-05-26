@@ -12,16 +12,24 @@ body > div > div > div > hr {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.inputs > div {
+.main > div > div,
+.main > div > div > div > div {
   padding: 5px;
 }
-.jumbotron{
+.main > div > div > div {
+  padding: 0 10px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+.header{
   margin-right: -10px;
   margin-left: -10px;
   margin-bottom: 15px;
-  padding: 10px 10px 1px 10px;
+  padding: 15px;
 }
-.jumbotron p{
+.header p{
+  font-size: 20px;
+  font-weight: 200;
   padding: 0px;
 }
 .add-btn{
@@ -34,11 +42,45 @@ body > div > div > div > hr {
 .records .panel{
   margin: 5px -10px 20px -10px;
 }
+.inputs{
+  position: relative;
+  overflow: hidden;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: .35s;
+  -o-transition-duration: .35s;
+  transition-duration: .35s;
+  -webkit-transition-property: height,visibility;
+  -o-transition-property: height,visibility;
+  transition-property: height,visibility,display;
+}
+.table-responsive{
+  margin: -1px;
+  border: none;
+}
+.panel-footer p{
+  margin: -1px 0;
+  padding: 0;
+}
 @media (min-width: 768px) {
   body{
     padding-top: 50px;
   }
   .jumbotron{
     padding: 30px 10px 20px 10px;
+  }
+  .table-responsive{
+    margin-bottom: -20px;
+  }
+}
+@media (max-width: 767px) {
+  .main > div > div > div {
+    padding: 0;
+    margin: -5px;
+    margin-top: 5px;
+  }
+  .main > div > div{
+    padding: 0 5px;
   }
 }
