@@ -39,7 +39,7 @@
         <!-- Header, total owes with some quick options -->
         <div class="col-lg-10 col-lg-offset-1">
           <div class="alert alert-info header" role="alert">
-            <p>As for <abbr title="attribute" id="owe-date"></abbr>, <span id="owe-text"></span><span id="owe-amount">Loading...</span></p>
+            <p id="owe-text">Loading</p>
             <p><button class="btn btn-primary" role="button" onclick="updateInputs(o);" id="paid-back">I paid back!</button> <button class="btn btn-default" role="button" onclick="updateInputs(rent);">I paid rent!</button></p>
           </div>
           <hr />
@@ -100,73 +100,6 @@
         </div>
         <!-- Monthly records list -->
         <div class="col-lg-10 col-lg-offset-1 records" id="records">
-
-          <!-- <div class="month panel panel-info">
-            <div class="panel-heading" onclick="$('#collapse052015').collapse('toggle')">
-              <h3 class="panel-title">May, 2015</h3>
-            </div>
-            <div id="collapse052015" class="panel-collapse collapse in">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th class="text-right">Zheng</th>
-                      <th class="text-right">Xiaoyu</th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>05/25/2015</td>
-                      <td><b>Zheng</b> paid <b><u>$500.00</u></b> to <b>Xiaoyu</b></td>
-                      <td class="text-right">-$500.00</td>
-                      <td class="text-right"></td>
-                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="1"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                    </tr>
-                    <tr>
-                      <td>05/25/2015</td>
-                      <td><b>Xiaoyu</b> paid <b><u>$1200.00</u></b> rent for <b>the house</b></td>
-                      <td class="text-right">$600.00</td>
-                      <td class="text-right"></td>
-                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="2"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                    </tr>
-                    <tr>
-                      <td>05/17/2015</td>
-                      <td><b>Zheng</b> paid <b><u>$600.00</u></b> rent for <b>the house</b></td>
-                      <td class="text-right"></td>
-                      <td class="text-right">$300.00</td>
-                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="3"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                    </tr>
-                    <tr>
-                      <td>05/17/2015</td>
-                      <td><b>Zheng</b> paid <b><u>$200.00</u></b> dinner for <b>Xiaoyu</b></td>
-                      <td class="text-right"></td>
-                      <td class="text-right">$200.00</td>
-                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="4"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                    </tr>
-                    <tr>
-                      <th></th>
-                      <td class="text-right"><b>Total</b></td>
-                      <td class="text-right">$100.00</td>
-                      <td class="text-right">$500.00</td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="panel-footer">
-              <p class="text-right"><b>Xiaoyu</b> -> <b>Zheng</b> <u>$400</u> for May, 2015.</p>
-            </div>
-          </div> -->
           <!-- <div class="text-center">
             <button type="button" id="loadMore" data-loading-text="Loading..." class="btn btn-default">Load more</button>
           </div> -->

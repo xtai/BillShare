@@ -27,7 +27,7 @@
   "name": "test",
   "category": "for",
   "userBID": 2,
-  "note": "rent of June, 2015"
+  "note": "a looooooooong word, with a looooooooong text, and still going on and on and on and on and on and on"
 }, {
   "recordID": 3,
   "datetime": 1424955700000,
@@ -35,9 +35,9 @@
   "currencyID": 0,
   "amount": 400,
   "name": "test",
-  "category": "to",
+  "category": "for",
   "userBID": 1,
-  "note": "rent of June, 2015"
+  "note": "test note"
 }, {
   "recordID": 4,
   "datetime": 1420955700000,
@@ -46,16 +46,26 @@
   "amount": 200,
   "name": "test",
   "category": "for",
-  "userBID": 1,
-  "note": "rent of June, 2015"
+  "userBID": 2,
+  "note": ""
 }, {
   "recordID": 5,
   "datetime": 1417955700000,
   "userAID": 1,
-  "currencyID": 0,
-  "amount": 100,
+  "currencyID": 1,
+  "amount": 620,
   "name": "test",
-  "category": "to",
+  "category": "for",
   "userBID": 0,
-  "note": "rent of June, 2015"
+  "note": null
+}, {
+  "recordID": 6,
+  "datetime": 1417855700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 200,
+  "name": "test",
+  "category": "for",
+  "userBID": 2,
+  "note": "test note"
 }]

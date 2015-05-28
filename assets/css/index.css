@@ -4,7 +4,10 @@ html {
 body {
   padding-top: 5px;
 }
-.btn:focus, .btn:active:focus, .btn.active:focus{
+abbr {
+  border-bottom: 1px dotted #777;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
   outline-color: transparent;
   outline-style: none;
 }
@@ -14,8 +17,7 @@ body > div > div > div > hr {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.main > div > div,
-.main > div > div > div > div {
+.main > div > div, .main > div > div > div > div {
   padding: 5px;
 }
 .main > div > div > div {
@@ -23,28 +25,31 @@ body > div > div > div > hr {
   margin-top: -5px;
   margin-bottom: -5px;
 }
-.header{
+.header {
   margin-right: -10px;
   margin-left: -10px;
   margin-bottom: 15px;
   padding: 15px;
 }
-.header p{
+.header p {
   font-size: 20px;
   font-weight: 200;
   padding: 0px;
 }
-.add-btn{
+.header p > b {
+  font-weight: 400;
+}
+.add-btn {
   padding-top: 5px;
   margin-left: -10px;
 }
-.footer{
+.footer {
   padding-bottom: 20px;
 }
-.records .panel{
+.records .panel {
   margin: 5px -10px 20px -10px;
 }
-.inputs{
+.inputs {
   position: relative;
   overflow: hidden;
   -webkit-transition-timing-function: ease;
@@ -53,42 +58,42 @@ body > div > div > div > hr {
   -webkit-transition-duration: .35s;
   -o-transition-duration: .35s;
   transition-duration: .35s;
-  -webkit-transition-property: height,visibility;
-  -o-transition-property: height,visibility;
-  transition-property: height,visibility,display;
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+  transition-property: height, visibility, display;
 }
-.table-responsive{
+.table-responsive {
   margin: -1px;
   border: none;
 }
-.table > tbody > tr > td:first-child{
+.table > tbody > tr > td:first-child {
   padding-left: 15px;
 }
-.panel-footer p{
+.panel-footer p {
   margin: -1px 0;
   padding: 0;
 }
 @media (min-width: 768px) {
-  body{
+  body {
     padding-top: 50px;
-  }
-  .jumbotron{
-    padding: 30px 10px 20px 10px;
-  }
-  .table-responsive{
-    margin-bottom: -20px;
-  }
+ }
+ .jumbotron {
+   padding: 30px 10px 20px 10px;
+}
+.table-responsive {
+  margin-bottom: -20px;
+}
 }
 @media (max-width: 767px) {
   .main > div > div > div {
     padding: 0;
     margin: -5px;
     margin-top: 5px;
-  }
-  .main > div > div{
-    padding: 0 5px;
-  }
-  .table > tbody > tr > td:first-child{
-    padding-left: 10px;
-  }
+ }
+ .main > div > div {
+   padding: 0 5px;
+}
+.table > tbody > tr > td:first-child {
+  padding-left: 10px;
+}
 }

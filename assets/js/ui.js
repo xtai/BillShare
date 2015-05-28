@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 $(window).resize(function() {
   if ($(window).width() < 992) {
-    $("#collapseInputs").collapse("hide");
+    //$("#collapseInputs").collapse("hide");
   } else if ($(window).width() > 991) {
     $("#collapseInputs").collapse("show");
   }
@@ -107,43 +107,55 @@ var hideInputs = function() {
     $("#showHideButton").text("Add");
   });
 }
-var updateOwe = function(owe) {
-  var strDate = (now.getMonth() + 1) + "/" + now.getDate() + "/" + now.getFullYear();
+var updateOweText = function(owe, dt) {
+  var t;
   if (owe > 0) {
-    $("#owe-date").html(strDate);
-    $("#owe-text").html("Xiaoyu owes Zheng ");
-    $("#owe-amount").html("<abbr title=\"attribute\">$" + Math.abs(owe).toFixed(2) + "</abbr>.");
-    ua = 1;
-    ub = 0;
+    t = "<b>Xiaoyu</b> owes <b>Zheng</b> <abbr>$" + Math.abs(owe).toFixed(2) + "</abbr>.";
   } else if (owe < 0) {
-    $("#owe-date").html(strDate);
-    $("#owe-text").html("Zheng owes Xiaoyu ");
-    $("#owe-amount").html("<abbr title=\"attribute\">$" + Math.abs(owe).toFixed(2) + "</abbr>.");
-    ua = 0;
-    ub = 1;
+    t = "<b>Zheng</b> owes <b>Xiaoyu</b> <abbr>$" + Math.abs(owe).toFixed(2) + "</abbr>.";
   } else {
-    $("#owe-date").html(strDate);
-    $("#owe-text").html("We clear");
-    $("#owe-amount").html("!");
-    $("#paid-back").hide();
+    t = "we are clear!"
   }
-  var o = {
-    "datetime": now,
-    "userAID": ua,
-    "currencyID": 0,
-    "amount": Math.abs(owe),
-    "name": "back",
-    "category": "to",
-    "userBID": ub,
-    "note": "Paid back on " + now.toString()
+  return "<span class=\"hidden-xs\">As for </span><abbr>" + dt + "</abbr>, " + t;
+}
+var addZero = function(input) {
+  if (input < 9) {
+    return "0" + input;
+  } else {
+    return input;
   }
-  return o
+}
+var updateOwe = function(owe) {
+  var date = (addZero(now.getMonth() + 1)) + "/" + addZero(now.getDate()) + "/" + now.getFullYear()
+  $("#owe-text").html(updateOweText(owe, date));
+  var ua;
+  var ub;
+  if (owe != 0) {
+    if (owe > 0) {
+      ua = 1;
+      ub = 0;
+    } else {
+      ua = 0;
+      ub = 1;
+    }
+    return o = {
+      "datetime": now,
+      "userAID": ua,
+      "currencyID": 0,
+      "amount": Math.abs(owe),
+      "name": "back",
+      "category": "to",
+      "userBID": ub,
+      "note": "Paid back on " + now.toString()
+    };
+  }
+  return;
 }
 $('#loadMore').on('click', function() {
   var $btn = $(this).button('loading');
-//  $btn.button('reset');
+  //  $btn.button('reset');
 })
-var allLoaded = function(){
+var allLoaded = function() {
   $('#loadMore').attr("disabled", "true");
   $('#loadMore').text("All records loaded");
 }

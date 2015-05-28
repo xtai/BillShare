@@ -34,7 +34,6 @@ var owe;
 $(document).ready(function() {
   updateInputs(inputs);
   initialRecordView();
-  $(".note").popover();
 });
 var updateInputs = function(data) {
   setUserA(data.userAID);
