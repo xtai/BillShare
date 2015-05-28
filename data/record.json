@@ -1,44 +1,61 @@
-{
-	"RecordID": 0,
-	"Datetime": "2015-05-17T18:00:00.000Z",
-	"UserAID": 0,
-	"CurrencyID": 0,
-	"Amount": 307.45344,
-	"Name": "Rent",
-	"Category": "for",
-	"UserBID": 1,
-	"Note": "Rent of First Month, May, 2015"
-},
-{
-	"RecordID": 1,
-	"Datetime": "2015-05-17T18:00:00.000Z",
-	"UserAID": 0,
-	"CurrencyID": 0,
-	"Amount": 353.02656,
-	"Name": "Rent",
-	"Category": "for",
-	"UserBID": 0,
-	"Note": "Rent of First Month, May, 2015"
-},
-{
-	"RecordID": 2,
-	"Datetime": "2015-05-26T02:00:00.000Z",
-	"UserAID": 1,
-	"CurrencyID": 0,
-	"Amount": 729.5925,
-	"Name": "Rent",
-	"Category": "for",
-	"UserBID": 0,
-	"Note": "Rent of June, 2015"
-},
-{
-	"RecordID": 3,
-	"Datetime": "2015-05-26T02:00:00.000Z",
-	"UserAID": 1,
-	"CurrencyID": 0,
-	"Amount": 635.4075,
-	"Name": "Rent",
-	"Category": "for",
-	"UserBID": 1,
-	"Note": "Rent of June, 2015"
-}
+[{
+  "recordID": 0,
+  "datetime": 1431882000000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 660.48,
+  "name": "rent",
+  "category": "for",
+  "userBID": 2,
+  "note": "rent of the first month, May, 2015"
+}, {
+  "recordID": 1,
+  "datetime": 1432645200000,
+  "userAID": 1,
+  "currencyID": 0,
+  "amount": 1379,
+  "name": "rent",
+  "category": "for",
+  "userBID": 2,
+  "note": "rent of June, 2015"
+}, {
+  "recordID": 2,
+  "datetime": 1424955600000,
+  "userAID": 1,
+  "currencyID": 0,
+  "amount": 1000,
+  "name": "test",
+  "category": "for",
+  "userBID": 2,
+  "note": "rent of June, 2015"
+}, {
+  "recordID": 3,
+  "datetime": 1424955700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 400,
+  "name": "test",
+  "category": "to",
+  "userBID": 1,
+  "note": "rent of June, 2015"
+}, {
+  "recordID": 4,
+  "datetime": 1420955700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 200,
+  "name": "test",
+  "category": "for",
+  "userBID": 1,
+  "note": "rent of June, 2015"
+}, {
+  "recordID": 5,
+  "datetime": 1417955700000,
+  "userAID": 1,
+  "currencyID": 0,
+  "amount": 100,
+  "name": "test",
+  "category": "to",
+  "userBID": 0,
+  "note": "rent of June, 2015"
+}]

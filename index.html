@@ -18,12 +18,29 @@
   </head>
   <body>
     <div class="container">
+      <div class="modal fade" id="editRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
       <div class="row">
         <!-- Header, total owes with some quick options -->
         <div class="col-lg-10 col-lg-offset-1">
           <div class="alert alert-info header" role="alert">
-            <p>As for <abbr title="attribute">05/26/2015</abbr>, Xiaoyu owes Zheng <abbr title="attribute">$400</abbr>.</p>
-            <p><a class="btn btn-primary" href="#" role="button">I paid back!</a> <a class="btn btn-default" href="#" role="button">I paid rent!</a></p>
+            <p>As for <abbr title="attribute" id="owe-date"></abbr>, <span id="owe-text"></span><span id="owe-amount">Loading...</span></p>
+            <p><button class="btn btn-primary" role="button" onclick="updateInputs(o);" id="paid-back">I paid back!</button> <button class="btn btn-default" role="button" onclick="updateInputs(rent);">I paid rent!</button></p>
           </div>
           <hr />
         </div>
@@ -59,7 +76,7 @@
                 <div class="inputs col-sm-6 col-md-3">
                   <div class="btn-group btn-group-justified" role="group">
                     <div class="btn-group btn-group-lg" role="group">
-                      <button type="button" class="btn btn-default" onclick="togglePrepos();" id="preposition">for</button>
+                      <button type="button" class="btn btn-default" onclick="toggleCategory();" id="category">for</button>
                     </div>
                     <div class="btn-group btn-group-lg" role="group">
                       <button type="button" class="btn btn-default" onclick="toggleUserB();" id="UserB">house</button>
@@ -67,23 +84,24 @@
                   </div>
                 </div>
                 <div class="col-sm-12 visible-sm visible-xs">
-                  <button type="button" class="btn btn-success btn-lg btn-block">Add</button>
+                  <button type="button" class="btn btn-success btn-lg btn-block" onclick="hideInputs(); addRecord();">Add</button>
                 </div>
               </div>
             </div>
             <div class="col-sm-12 visible-md">
-              <button type="button" class="btn btn-success btn-lg btn-block">Add</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" onclick="addRecord();">Add</button>
             </div>
           </div>
           <hr />
         </div>
         <!-- This add button shows when screen width is wide enough-->
         <div class="visible-lg col-md-1 add-btn">
-          <button type="button" class="btn btn-success btn-lg">Add</button>
+          <button type="button" class="btn btn-success btn-lg" onclick="addRecord();">Add</button>
         </div>
         <!-- Monthly records list -->
-        <div class="col-lg-10 col-lg-offset-1 records">
-          <div class="month panel panel-info">
+        <div class="col-lg-10 col-lg-offset-1 records" id="records">
+
+          <!-- <div class="month panel panel-info">
             <div class="panel-heading" onclick="$('#collapse052015').collapse('toggle')">
               <h3 class="panel-title">May, 2015</h3>
             </div>
@@ -106,32 +124,32 @@
                       <td><b>Zheng</b> paid <b><u>$500.00</u></b> to <b>Xiaoyu</b></td>
                       <td class="text-right">-$500.00</td>
                       <td class="text-right"></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="1"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
                       <td>05/25/2015</td>
                       <td><b>Xiaoyu</b> paid <b><u>$1200.00</u></b> rent for <b>the house</b></td>
                       <td class="text-right">$600.00</td>
                       <td class="text-right"></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="2"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
                       <td>05/17/2015</td>
                       <td><b>Zheng</b> paid <b><u>$600.00</u></b> rent for <b>the house</b></td>
                       <td class="text-right"></td>
                       <td class="text-right">$300.00</td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="3"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
                       <td>05/17/2015</td>
                       <td><b>Zheng</b> paid <b><u>$200.00</u></b> dinner for <b>Xiaoyu</b></td>
                       <td class="text-right"></td>
                       <td class="text-right">$200.00</td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
-                      <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a class="note" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                      <td class="text-center"><a data-toggle="modal" data-target="#editRecord" data-recordid="4"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     </tr>
                     <tr>
                       <th></th>
@@ -148,14 +166,21 @@
             <div class="panel-footer">
               <p class="text-right"><b>Xiaoyu</b> -> <b>Zheng</b> <u>$400</u> for May, 2015.</p>
             </div>
-          </div>
-          <hr />
+          </div> -->
+          <!-- <div class="text-center">
+            <button type="button" id="loadMore" data-loading-text="Loading..." class="btn btn-default">Load more</button>
+          </div> -->
         </div>
       </div>
+      <hr />
       <p class="text-center footer">© 2015 BillShare. Xiaoyu Tai, Zheng Yan.</p>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/record_view.js"></script>
+    <script src="assets/js/set.js"></script>
+    <script src="assets/js/test.js"></script>
     <script src="assets/js/index.js"></script>
   </body>
 </html>
