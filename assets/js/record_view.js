@@ -1,7 +1,7 @@
 var all_records;
 var year_month = new Array();
 var initialRecordView = function() {
-  $.getJSON("/~xtai/BillShare-bk/data/record.json", function(data) {
+  $.getJSON("/data/record.json", function(data) {
     all_records = data;
     saveYearMonth();
     showAllMonth();
