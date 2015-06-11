@@ -2,9 +2,6 @@
 $("#amount").on("touchstart", function() {
   $(this).attr("type", "number");
 });
-$("#amount").on("keydown blur", function() {
-  $(this).attr("type", "text");
-});
 // Show Inputs when screen width > 991px
 $(document).ready(function() {
   if ($(window).width() < 992) {
@@ -150,12 +147,4 @@ var updateOwe = function(owe) {
     };
   }
   return;
-}
-$('#loadMore').on('click', function() {
-  var $btn = $(this).button('loading');
-  //  $btn.button('reset');
-})
-var allLoaded = function() {
-  $('#loadMore').attr("disabled", "true");
-  $('#loadMore').text("All records loaded");
 }

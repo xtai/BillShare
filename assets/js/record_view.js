@@ -1,6 +1,6 @@
 var all_records;
 var year_month = new Array();
-var month_text = new Array(12)
+var month_text = new Array(13)
 month_text[0] = null;
 month_text[1] = "January";
 month_text[2] = "February";
@@ -24,7 +24,7 @@ var initialRecordView = function() {
   });
 }
 var checkInArray = function(array, x) {
-  for (i in array) {
+  for (var i in array) {
     if (array[i] == x) {
       return true;
     }
@@ -32,7 +32,7 @@ var checkInArray = function(array, x) {
   return false;
 }
 var saveYearMonth = function() {
-  for (i in all_records) {
+  for (var i in all_records) {
     dt = new Date(all_records[i].datetime);
     var m = 0;
     if (dt.getMonth() < 9) {
@@ -55,7 +55,7 @@ var saveYearMonth = function() {
 var calculateAll = function() {}
 var showAllMonth = function() {
   var ym_html = new Array();
-  for (i in year_month) {
+  for (var i in year_month) {
     var b = year_month[i].toString().split(".");
     var ym_id = b[0] + b[1];
     var ym_color = "default";
@@ -65,7 +65,7 @@ var showAllMonth = function() {
     }
     ym_html.push("<div class=\"month panel panel-" + ym_color + "\">" + "<div class=\"panel-heading\" onclick=\"$('#collapse_" + ym_id + "').collapse('toggle')\">" + "<h3 class=\"panel-title\">" + ym_name + "</h3></div>" + "<div id=\"collapse_" + ym_id + "\" class=\"panel-collapse collapse in\">" + "<div class=\"table-responsive\"><table class=\"table table-hover\">" + "<thead><tr><th></th><th></th><th class=\"text-right\">Zheng</th>" + "<th class=\"text-right\">Xiaoyu</th><th></th></tr></thead>" + "<tbody id=\"record_" + ym_id + "\"></tbody></table></div></div>" + "<div class=\"panel-footer\"><p class=\"text-right\" id=\"summary_" + ym_id + "\"></p>" + "</div></div>");
   }
-  for (i in ym_html) {
+  for (var i in ym_html) {
     $("#records").prepend(ym_html[i]);
   }
 }
@@ -100,7 +100,7 @@ var addAllRecords = function() {
     var result = new Array(2);
     var amo = parseFloat(r.amount);
     if (r.currencyID == 1) {
-      amo = parseFloat(r.amount / 6.2);
+      amo = parseFloat(r.amount / rate);
     }
     if (r.category == "to") {
       result[r.userAID] = parseFloat(-amo);
@@ -128,7 +128,7 @@ var addAllRecords = function() {
   }
   var cl = function(cid, num) {
     if (cid == 1) {
-      num *= 6.2;
+      num *= rate;
     }
     if (num == 0) {
       return "";
@@ -148,10 +148,10 @@ var addAllRecords = function() {
     if (r.note != null) {
       nt = " class=\"note\" data-container=\"body\" data-toggle=\"popover\"" + " data-placement=\"top\" data-trigger=\"hover\" data-content=\"" + r.note + "\"";
     }
-    return "<tr" + nt + "><td>" + rec_date(r.datetime) + "</td>" + "<td><b>" + usr_name(r.userAID) + "</b> paid <b><abbr>" + cur_name(r.currencyID) + r.amount.toFixed(2) + "</abbr></b> " + r.name + " " + r.category + " <b>" + usr_name(r.userBID) + "</b></td>" + "<td class=\"text-right\">" + amo[0] + "</td>" + "<td class=\"text-right\">" + amo[1] + "</td>" + "<td class=\"text-center\"><a data-toggle=\"modal\" data-target=\"#editRecord\" data-recordid=\"" + r.recordID + "\"><span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></a></td></tr>";
+    return "<tr><td>" + rec_date(r.datetime) + "</td>" + "<td><b>" + usr_name(r.userAID) + "</b> paid <b><abbr" + nt + ">" + cur_name(r.currencyID) + r.amount.toFixed(2) + "</abbr></b> " + r.name + " " + r.category + " <b>" + usr_name(r.userBID) + "</b></td>" + "<td class=\"text-right\">" + amo[0] + "</td>" + "<td class=\"text-right\">" + amo[1] + "</td>" + "<td class=\"text-center\"><a class=\"btn btn-default btn-xs\" data-toggle=\"modal\" data-target=\"#editRecord\" data-recordid=\"" + r.recordID + "\">&nbsp;<span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>&nbsp;</a></td></tr>";
   }
   var get_index = function(x, array) {
-    for (it in array) {
+    for (var it in array) {
       if (x == array[it]) {
         return it;
       }
@@ -166,19 +166,19 @@ var addAllRecords = function() {
   }
   var summary_html = function(name, i) {
     var owe_acc = 0;
-    for (it in month_amo) {
+    for (var it in month_amo) {
       if (year_month[it] <= year_month[i]) {
         owe_acc += (month_amo[it][1] - month_amo[it][0]);
       }
     }
     return updateOweText(owe_acc, name);
   }
-  for (i in year_month) {
+  for (var i in year_month) {
     month_amo[i] = new Array(2);
     month_amo[i][0] = 0;
     month_amo[i][1] = 0;
   }
-  for (i in all_records) {
+  for (var i in all_records) {
     var ym = parseFloat(all_records[i].ym_id.slice(0, 4) + "." + all_records[i].ym_id.slice(4, 6));
     var index = parseInt(get_index(ym, year_month));
     if (index != -1) {
@@ -188,10 +188,10 @@ var addAllRecords = function() {
     total_amo[0] += usr_amo(all_records[i])[0];
     total_amo[1] += usr_amo(all_records[i])[1];
   }
-  for (i in all_records) {
+  for (var i in all_records) {
     $("#record_" + all_records[i].ym_id).prepend(single_html(all_records[i]));
   }
-  for (i in year_month) {
+  for (var i in year_month) {
     var b = year_month[i].toString().split(".");
     var name = b[0] + b[1];
     var ym_name = month_text[parseInt(b[1])] + ", " + parseInt(b[0]);

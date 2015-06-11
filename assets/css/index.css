@@ -1,11 +1,14 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
-body {
-  padding-top: 5px;
-}
 abbr {
   border-bottom: 1px dotted #777;
+}
+a {
+  cursor: pointer;
+}
+.title{
+  font-weight: 200;
 }
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline-color: transparent;
@@ -75,25 +78,31 @@ body > div > div > div > hr {
 }
 @media (min-width: 768px) {
   body {
-    padding-top: 50px;
- }
- .jumbotron {
-   padding: 30px 10px 20px 10px;
-}
-.table-responsive {
-  margin-bottom: -20px;
-}
+    padding-top: 0px;
+  }
+  .jumbotron {
+    padding: 30px 10px 20px 10px;
+  }
+  .table-responsive {
+    margin-bottom: -20px;
+  }
 }
 @media (max-width: 767px) {
   .main > div > div > div {
     padding: 0;
     margin: -5px;
     margin-top: 5px;
- }
- .main > div > div {
-   padding: 0 5px;
-}
-.table > tbody > tr > td:first-child {
-  padding-left: 10px;
-}
+  }
+  .main > div > div {
+    padding: 0 5px;
+  }
+  .table > tbody > tr > td:first-child {
+    padding-left: 10px;
+  }
+  .title{
+    font-size: 24px;
+    margin: 10px;
+    margin-left: -8px;
+    padding: 0;
+  }
 }

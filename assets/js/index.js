@@ -30,10 +30,12 @@ var clean = {
   "note": null
 }
 var now = new Date();
+var rate = 6.2;
 var owe;
 $(document).ready(function() {
   updateInputs(inputs);
   initialRecordView();
+  $("#datetimepicker").datetimepicker();
 });
 var updateInputs = function(data) {
   setUserA(data.userAID);
