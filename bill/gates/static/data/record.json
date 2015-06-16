@@ -1,0 +1,71 @@
+[{
+  "recordID": 0,
+  "datetime": 1431882000000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 660.48,
+  "name": "rent",
+  "category": "for",
+  "userBID": 2,
+  "note": "rent of the first month, May, 2015"
+}, {
+  "recordID": 1,
+  "datetime": 1432645200000,
+  "userAID": 1,
+  "currencyID": 0,
+  "amount": 1379,
+  "name": "rent",
+  "category": "for",
+  "userBID": 2,
+  "note": "rent of June, 2015"
+}, {
+  "recordID": 2,
+  "datetime": 1424955600000,
+  "userAID": 1,
+  "currencyID": 0,
+  "amount": 1000,
+  "name": "test",
+  "category": "for",
+  "userBID": 2,
+  "note": "a looooooooong word, with a looooooooong text, and still going on and on and on and on and on and on"
+}, {
+  "recordID": 3,
+  "datetime": 1424955700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 400,
+  "name": "test",
+  "category": "for",
+  "userBID": 1,
+  "note": "test note"
+}, {
+  "recordID": 4,
+  "datetime": 1420955700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 200,
+  "name": "test",
+  "category": "for",
+  "userBID": 2,
+  "note": ""
+}, {
+  "recordID": 5,
+  "datetime": 1417955700000,
+  "userAID": 1,
+  "currencyID": 1,
+  "amount": 620,
+  "name": "test",
+  "category": "for",
+  "userBID": 0,
+  "note": null
+}, {
+  "recordID": 6,
+  "datetime": 1417855700000,
+  "userAID": 0,
+  "currencyID": 0,
+  "amount": 200,
+  "name": "test",
+  "category": "for",
+  "userBID": 2,
+  "note": "test note"
+}]
