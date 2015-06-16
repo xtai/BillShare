@@ -1,57 +1,68 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
+
 abbr {
   border-bottom: 1px dotted #777;
 }
+
 a {
   cursor: pointer;
 }
-.title{
+
+.title {
   font-weight: 200;
 }
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline-color: transparent;
   outline-style: none;
 }
+
 body > div > div > div > hr {
-  margin-right: -10px;
-  margin-left: -10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px -10px;
 }
-.main > div > div, .main > div > div > div > div {
+
+.main-inputs > div > div, .main-inputs > div > div > div > div {
   padding: 5px;
 }
-.main > div > div > div {
+
+.main-inputs > div > div > div {
   padding: 0 10px;
   margin-top: -5px;
   margin-bottom: -5px;
 }
+
 .header {
   margin-right: -10px;
   margin-left: -10px;
   margin-bottom: 15px;
   padding: 15px;
 }
+
 .header p {
   font-size: 20px;
   font-weight: 200;
   padding: 0px;
 }
+
 .header p > b {
   font-weight: 400;
 }
+
 .add-btn {
   padding-top: 5px;
   margin-left: -10px;
 }
+
 .footer {
   padding-bottom: 20px;
 }
+
 .records .panel {
   margin: 5px -10px 20px -10px;
 }
+
 .inputs {
   position: relative;
   overflow: hidden;
@@ -65,17 +76,21 @@ body > div > div > div > hr {
   -o-transition-property: height, visibility;
   transition-property: height, visibility, display;
 }
+
 .table-responsive {
   margin: -1px;
   border: none;
 }
+
 .table > tbody > tr > td:first-child {
   padding-left: 15px;
 }
+
 .panel-footer p {
   margin: -1px 0;
   padding: 0;
 }
+
 @media (min-width: 768px) {
   body {
     padding-top: 0px;
@@ -87,19 +102,20 @@ body > div > div > div > hr {
     margin-bottom: -20px;
   }
 }
+
 @media (max-width: 767px) {
-  .main > div > div > div {
+  .main-inputs > div > div > div {
     padding: 0;
     margin: -5px;
     margin-top: 5px;
   }
-  .main > div > div {
+  .main-inputs > div > div {
     padding: 0 5px;
   }
   .table > tbody > tr > td:first-child {
     padding-left: 10px;
   }
-  .title{
+  .title {
     font-size: 24px;
     margin: 10px;
     margin-left: -8px;
