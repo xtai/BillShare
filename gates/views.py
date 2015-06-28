@@ -4,11 +4,13 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
+from .models import Group, Record
+
 
 @login_required
 def index(request):
     context = {}
-    return render(request, 'index.html', context)
+    return render(request, 'gates/index.html', context)
 
 
 def signin(request):
@@ -28,7 +30,7 @@ def signin(request):
         context = {}
         if 'next' in request.GET:
             context = {'next': request.GET['next']}
-        return render(request, 'login.html', context)
+        return render(request, 'gates/login.html', context)
 
 
 def logout(request):
@@ -42,4 +44,4 @@ def signup(request):
         password = request.POST['password']
     else:
         context = {}
-        return render(request, 'index.html', context)
+        return render(request, 'gates/index.html', context)

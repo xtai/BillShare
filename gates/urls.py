@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
-from gates import views
+from django.conf.urls import url
 
-urlpatterns = patterns(
-    '',
+from . import views
+
+urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^login/$', views.signin),
-)
+    url(r'^login/$', views.signin, name='login'),
+]
