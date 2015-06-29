@@ -2,30 +2,34 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Group(models.Model):
+class Project(models.Model):
     name = models.CharField(max_length=100)
     desc = models.CharField(max_length=200)
     members = models.ManyToManyField(User)
-    creation_date = models.DateTimeField(auto_now=True)
+    creation_date = models.DateTimeField()
+    last_change_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
 
 class Record(models.Model):
-    ACTIONS = (
-        ('F', 'Pay for'),
-        ('T', 'Pay to'),
-        ('S', 'Split'),
-    )
-    group = models.ForeignKey(Group)
+    """
+    (payer is not receiver, amount is negative) -->
+        Payer pay back to receiver.
+    (payer is not receiver, amount is positive) -->
+        Receiver need to pay back to payer.
+    (payer is receiver, amount has to be positive) -->
+        Payer pay for the project, spilting with entire project.
+    """
+    group = models.ForeignKey(Project)
     name = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    note = models.CharField(max_length=200)
+    note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
-    action = models.CharField(max_length=1, choices=ACTIONS)
-    receiver = models.ForeignKey(User, related_name='receiver', blank=True)
-    record_date = models.DateTimeField(auto_now=True)
+    receiver = models.ForeignKey(User, related_name='receiver')
+    creation_date = models.DateTimeField()
+    last_change_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

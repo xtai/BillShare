@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+<h1>{{ project.name }}</h1>
+<p>{{ project.desc }}, created on {{ project.creation_date }}</p>
+
+<table border>
+    <thead>
+        <tr>
+            <th>name</th>
+            <th>amount</th>
+            <th>payer/receiver</th>
+            <th>date</th>
+            <th>last change</th>
+            <th>note</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for record in record_set %}
+        <tr>
+            <th>{{ record.name }}</th>
+            <td>{{ record.amount }}</td>
+            <td>{{ record.payer }}/{{ record.receiver }}</td>
+            <td>{{ record.creation_date }}</td>
+            <td>{{ record.last_change_date }}</td>
+            <td>{{ record.note }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
