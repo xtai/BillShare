@@ -3,6 +3,12 @@
 <h1>{{ project.name }}</h1>
 <p>{{ project.desc }}, created on {{ project.creation_date }}</p>
 
+{% if not record_set %}
+
+<p>No records avaliable for this project yet.</p>
+
+{% else %}
+
 <table border>
     <thead>
         <tr>
@@ -27,3 +33,5 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% endif %}

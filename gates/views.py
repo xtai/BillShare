@@ -3,46 +3,50 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 
 # from django.contrib.auth.models import User
-from .models import Project
+from .models import Project, Record
 
 
 class LoginRequiredMixin(object):
+
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
 
-class IndexView(LoginRequiredMixin, generic.ListView):
+class ProjectListView(LoginRequiredMixin, generic.ListView):
     template_name = 'gates/index.html'
     context_object_name = 'project_list'
 
     def get_queryset(self):
         """
-        Only display current logged in user's project
+        Only display current logged in user's projects
         """
         return self.request.user.project_set.order_by('-creation_date')
 
 
-class ProjectView(LoginRequiredMixin, generic.DetailView):
+class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
     model = Project
     template_name = 'gates/project.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectView, self).get_context_data(**kwargs)
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
         # newer record at first
-        context['record_set'] = context[
-            'project'].record_set.order_by('-creation_date')
+        record_set = context['project'].record_set.order_by('-creation_date')
+        context['record_set'] = record_set
         return context
 
     def get(self, request, *args, **kwargs):
-        object = super(ProjectView, self).get_object()
+        object = super(ProjectDetailView, self).get_object()
         if self.request.user in object.members.all():
             # only visiable to mebmers within the project
-            return super(ProjectView, self).get(self, request, *args, **kwargs)
+            return super(ProjectDetailView, self).get(self, **kwargs)
         else:
+            # throw 404 for non-member
             raise Http404()
 
 
@@ -72,7 +76,7 @@ class LoginView(generic.View):
                     return redirect(next_url)
                 else:
                     context = {
-                        'error_message': "You account has been disabled.",
+                        'error_message': "Your account has been disabled.",
                         'next': next_url
                     }
             else:
@@ -85,7 +89,45 @@ class LoginView(generic.View):
             return redirect('/')
 
 
-def logout_view(request):
-    if request.user.is_authenticated():
-        logout(request)
-    return redirect('/accounts/login/')
+class LogoutView(generic.View):
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            logout(request)
+        return redirect('/accounts/login/')
+
+
+class ProjectCreateView(CreateView):
+    model = Project
+    fields = ['name', 'desc', 'members', 'creation_date']
+    template_name_suffix = '_create_form'
+
+
+class ProjectUpdateView(UpdateView):
+    model = Project
+    fields = ['name', 'desc', 'members', 'creation_date']
+    template_name_suffix = '_update_form'
+
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    success_url = reverse_lazy('project-list')
+
+
+class RecordCreateView(CreateView):
+    model = Record
+    fields = ['group', 'name', 'amount', 'note',
+              'payer', 'receiver', 'creation_date']
+    template_name_suffix = '_create_form'
+
+
+class RecordUpdateView(UpdateView):
+    model = Record
+    fields = ['group', 'name', 'amount', 'note',
+              'payer', 'receiver', 'creation_date']
+    template_name_suffix = '_update_form'
+
+
+class RecordDeleteView(DeleteView):
+    model = Record
+    success_url = reverse_lazy('record-list')
