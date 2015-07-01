@@ -1,8 +1,14 @@
 {% load staticfiles %}
 
-<h1>{{ project.name }}</h1>
-<p>{{ project.desc }}, created on {{ project.creation_date }}</p>
+<a href="{% url 'gates:index' %}">back</a>
 
+<h2>{{ project.name }}</h2>
+<p>desc: {{ project.desc }}
+<br/>creation_date: {{ project.creation_date }}
+<br/>id: {{ project.id }}
+<br/>members: {{ project.members.all }}</p>
+<p><a href="{% url 'gates:project_delete' project.id %}">delete this project?</a><p/>
+<p><a href="{% url 'gates:record_add' pid=project.id %}">Add a new record</a><p/>
 {% if not record_set %}
 
 <p>No records avaliable for this project yet.</p>
@@ -12,23 +18,27 @@
 <table border>
     <thead>
         <tr>
+            <th>id</th>
             <th>name</th>
             <th>amount</th>
             <th>payer/receiver</th>
             <th>date</th>
             <th>last change</th>
             <th>note</th>
+            <th>delete</th>
         </tr>
     </thead>
     <tbody>
     {% for record in record_set %}
         <tr>
-            <th>{{ record.name }}</th>
+            <th>{{ record.id }}</th>
+            <th><a href="{% url 'gates:record_update' pid=project.id pk=record.id %}">{{ record.name }}</a></th>
             <td>{{ record.amount }}</td>
             <td>{{ record.payer }}/{{ record.receiver }}</td>
             <td>{{ record.creation_date }}</td>
             <td>{{ record.last_change_date }}</td>
             <td>{{ record.note }}</td>
+            <th><a href="{% url 'gates:record_delete' pid=project.id  pk=record.id %}">delete?</a></th>
         </tr>
     {% endfor %}
     </tbody>

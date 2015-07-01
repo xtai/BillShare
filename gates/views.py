@@ -1,10 +1,8 @@
-from django.http import Http404
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth import authenticate, decorators, login, logout
 from django.core.urlresolvers import reverse_lazy
+from django.http import Http404
+from django.shortcuts import redirect, render
+from django.views import generic
 
 # from django.contrib.auth.models import User
 from .models import Project, Record
@@ -15,7 +13,7 @@ class LoginRequiredMixin(object):
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
-        return login_required(view)
+        return decorators.login_required(view)
 
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
@@ -40,13 +38,13 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
         context['record_set'] = record_set
         return context
 
-    def get(self, request, *args, **kwargs):
+    def get(self, *args, **kwargs):
         object = super(ProjectDetailView, self).get_object()
         if self.request.user in object.members.all():
             # only visiable to mebmers within the project
-            return super(ProjectDetailView, self).get(self, **kwargs)
+            return super(ProjectDetailView, self).get(self, *args, **kwargs)
         else:
-            # throw 404 for non-member
+            # throw forbidden for non-member
             raise Http404()
 
 
@@ -97,37 +95,84 @@ class LogoutView(generic.View):
         return redirect('/accounts/login/')
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(generic.edit.CreateView):
     model = Project
-    fields = ['name', 'desc', 'members', 'creation_date']
+    fields = ['name', 'desc', 'creation_date']
     template_name_suffix = '_create_form'
 
+    def form_valid(self, form):
+        r = super(ProjectCreateView, self).form_valid(form)
+        self.object.members.add(self.request.user)
+        return r
 
-class ProjectUpdateView(UpdateView):
+
+class ProjectUpdateView(generic.edit.UpdateView):
     model = Project
-    fields = ['name', 'desc', 'members', 'creation_date']
+    fields = ['name', 'desc', 'creation_date']
     template_name_suffix = '_update_form'
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(generic.edit.DeleteView):
     model = Project
-    success_url = reverse_lazy('project-list')
+    success_url = reverse_lazy('gates:index')
 
 
-class RecordCreateView(CreateView):
+class RecordCreateView(generic.edit.CreateView):
     model = Record
-    fields = ['group', 'name', 'amount', 'note',
+    fields = ['name', 'amount', 'note',
               'payer', 'receiver', 'creation_date']
     template_name_suffix = '_create_form'
 
+    def form_valid(self, form):
+        pid = self.kwargs['pid']
+        form.instance.group = self.request.user.project_set.get(pk=pid)
+        self.success_url = '/project/' + str(pid)
+        return super(RecordCreateView, self).form_valid(form)
 
-class RecordUpdateView(UpdateView):
+
+class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Record
-    fields = ['group', 'name', 'amount', 'note',
+    fields = ['name', 'amount', 'note',
               'payer', 'receiver', 'creation_date']
     template_name_suffix = '_update_form'
 
+    def get(self, *args, **kwargs):
+        # check if the record belongs to the project
+        # throw forbidden otherwise
+        if self.kwargs['pid'] == str(self.get_object().group.pk):
+            return super(RecordUpdateView, self).get(self, *args, **kwargs)
+        else:
+            raise Http404()
 
-class RecordDeleteView(DeleteView):
+    def post(self, *args, **kwargs):
+        # check if the record belongs to the project
+        # throw forbidden otherwise
+        if self.kwargs['pid'] == str(self.get_object().group.pk):
+            return super(RecordUpdateView, self).post(self, *args, **kwargs)
+        else:
+            raise Http404()
+
+    def form_valid(self, form):
+        self.success_url = '/project/' + str(form.instance.group.pk)
+        return super(RecordUpdateView, self).form_valid(form)
+
+
+class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Record
-    success_url = reverse_lazy('record-list')
+
+    def get(self, *args, **kwargs):
+        # check if the record belongs to the project
+        # throw forbidden otherwise
+        if self.kwargs['pid'] == str(self.get_object().group.pk):
+            return super(RecordDeleteView, self).get(self, *args, **kwargs)
+        else:
+            raise Http404()
+
+    def post(self, *args, **kwargs):
+        # check if the record belongs to the project
+        # throw forbidden otherwise
+        if self.kwargs['pid'] == str(self.get_object().group.pk):
+            self.success_url = '/project/' + str(self.kwargs['pid'])
+            return super(RecordDeleteView, self).post(self, *args, **kwargs)
+        else:
+            raise Http404()

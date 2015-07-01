@@ -2,10 +2,20 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+<h2>Welcome, {{ user.username }}!</h2>
+
+<p>user: {{ user }}
+<br>id: {{ user.username }}
+<br>username: {{ user.username }}
+<br>full name: {{ user.last_name }}, {{ user.first_name }}
+<br>email: {{ user.email }}</p>
+
+<a href="/project/add/">Create a new project</a>
+
 {% if project_list %}
     <ul>
     {% for project in project_list %}
-        <li><a href="{% url 'gates:project' project.id %}">{{ project.name }}</a></li>
+        <li><a href="{% url 'gates:project' project.id %}">{{ project.name }}</a>, <a href="{% url 'gates:project_update' project.id %}">edit</a></li>
     {% endfor %}
     </ul>
 {% else %}

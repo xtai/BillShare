@@ -21,10 +21,10 @@ urlpatterns = [
     url(r'project/(?P<pk>[0-9]+)/delete/$',
         views.ProjectDeleteView.as_view(), name='project_delete'),
     # Record model add/update/delete
-    url(r'record/add/$',
+    url(r'project/(?P<pid>[0-9]+)/record/add/$',
         views.RecordCreateView.as_view(), name='record_add'),
-    url(r'record/(?P<pk>[0-9]+)/$',
+    url(r'project/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/$',
         views.RecordUpdateView.as_view(), name='record_update'),
-    url(r'record/(?P<pk>[0-9]+)/delete/$',
+    url(r'project/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/delete/$',
         views.RecordDeleteView.as_view(), name='record_delete'),
 ]
