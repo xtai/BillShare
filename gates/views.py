@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 # from django.contrib.auth.models import User
-from .models import Project, Record
+from .models import Group, Record
 
 
 class LoginRequiredMixin(object):
@@ -16,33 +16,33 @@ class LoginRequiredMixin(object):
         return decorators.login_required(view)
 
 
-class ProjectListView(LoginRequiredMixin, generic.ListView):
+class GroupListView(LoginRequiredMixin, generic.ListView):
     template_name = 'gates/index.html'
-    context_object_name = 'project_list'
+    context_object_name = 'group_list'
 
     def get_queryset(self):
         """
-        Only display current logged in user's projects
+        Only display current logged in user's groups
         """
-        return self.request.user.project_set.order_by('-creation_date')
+        return self.request.user.group_set.order_by('-creation_date')
 
 
-class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Project
-    template_name = 'gates/project.html'
+class GroupDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Group
+    template_name = 'gates/group.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
         # newer record at first
-        record_set = context['project'].record_set.order_by('-creation_date')
+        record_set = context['group'].record_set.order_by('-creation_date')
         context['record_set'] = record_set
         return context
 
     def get(self, *args, **kwargs):
-        object = super(ProjectDetailView, self).get_object()
+        object = super(GroupDetailView, self).get_object()
         if self.request.user in object.members.all():
-            # only visiable to mebmers within the project
-            return super(ProjectDetailView, self).get(self, *args, **kwargs)
+            # only visiable to mebmers within the group
+            return super(GroupDetailView, self).get(self, *args, **kwargs)
         else:
             # throw forbidden for non-member
             raise Http404()
@@ -95,25 +95,25 @@ class LogoutView(generic.View):
         return redirect('/accounts/login/')
 
 
-class ProjectCreateView(generic.edit.CreateView):
-    model = Project
+class GroupCreateView(generic.edit.CreateView):
+    model = Group
     fields = ['name', 'desc', 'creation_date']
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
-        r = super(ProjectCreateView, self).form_valid(form)
+        r = super(GroupCreateView, self).form_valid(form)
         self.object.members.add(self.request.user)
         return r
 
 
-class ProjectUpdateView(generic.edit.UpdateView):
-    model = Project
+class GroupUpdateView(generic.edit.UpdateView):
+    model = Group
     fields = ['name', 'desc', 'creation_date']
     template_name_suffix = '_update_form'
 
 
-class ProjectDeleteView(generic.edit.DeleteView):
-    model = Project
+class GroupDeleteView(generic.edit.DeleteView):
+    model = Group
     success_url = reverse_lazy('gates:index')
 
 
@@ -125,8 +125,8 @@ class RecordCreateView(generic.edit.CreateView):
 
     def form_valid(self, form):
         pid = self.kwargs['pid']
-        form.instance.group = self.request.user.project_set.get(pk=pid)
-        self.success_url = '/project/' + str(pid)
+        form.instance.group = self.request.user.group_set.get(pk=pid)
+        self.success_url = '/group/' + str(pid)
         return super(RecordCreateView, self).form_valid(form)
 
 
@@ -137,7 +137,7 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     template_name_suffix = '_update_form'
 
     def get(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordUpdateView, self).get(self, *args, **kwargs)
@@ -145,7 +145,7 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
             raise Http404()
 
     def post(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordUpdateView, self).post(self, *args, **kwargs)
@@ -153,7 +153,7 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
             raise Http404()
 
     def form_valid(self, form):
-        self.success_url = '/project/' + str(form.instance.group.pk)
+        self.success_url = '/group/' + str(form.instance.group.pk)
         return super(RecordUpdateView, self).form_valid(form)
 
 
@@ -161,7 +161,7 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Record
 
     def get(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordDeleteView, self).get(self, *args, **kwargs)
@@ -169,10 +169,10 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
             raise Http404()
 
     def post(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
-            self.success_url = '/project/' + str(self.kwargs['pid'])
+            self.success_url = '/group/' + str(self.kwargs['pid'])
             return super(RecordDeleteView, self).post(self, *args, **kwargs)
         else:
             raise Http404()

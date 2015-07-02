@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from .models import Project, Record
+from .models import Group, Record
 
 
 class RecordInline(admin.TabularInline):
     model = Record
     extra = 1
 
-class ProjectAdmin(admin.ModelAdmin):
+class GroupAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name', 'desc']}),
         ('Members', {'fields': ['members']}),
@@ -19,5 +19,5 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['name', 'desc']
 
 
-admin.site.register(Project, ProjectAdmin)
+admin.site.register(Group, GroupAdmin)
 admin.site.register(Record)
