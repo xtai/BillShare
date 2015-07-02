@@ -7,7 +7,7 @@ class Group(models.Model):
     name = models.CharField(max_length=100)
     desc = models.CharField(max_length=200)
     members = models.ManyToManyField(User)
-    creation_date = models.DateTimeField()
+    creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -32,7 +32,7 @@ class Record(models.Model):
     note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
     receiver = models.ForeignKey(User, related_name='receiver')
-    creation_date = models.DateTimeField()
+    creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

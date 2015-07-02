@@ -8,11 +8,13 @@ urlpatterns = [
         views.GroupListView.as_view(), name='index'),
     url(r'^group/(?P<pk>[0-9]+)/$',
         views.GroupDetailView.as_view(), name='group'),
+
     # User auth
     url(r'^accounts/login/$',
         views.LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$',
         views.LogoutView.as_view(), name='logout'),
+
     # Group model add/update/delete
     url(r'group/add/$',
         views.GroupCreateView.as_view(), name='group_add'),
@@ -20,6 +22,7 @@ urlpatterns = [
         views.GroupUpdateView.as_view(), name='group_update'),
     url(r'group/(?P<pk>[0-9]+)/delete/$',
         views.GroupDeleteView.as_view(), name='group_delete'),
+
     # Record model add/update/delete
     url(r'group/(?P<pid>[0-9]+)/record/add/$',
         views.RecordCreateView.as_view(), name='record_add'),

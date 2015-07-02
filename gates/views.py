@@ -97,7 +97,7 @@ class LogoutView(generic.View):
 
 class GroupCreateView(generic.edit.CreateView):
     model = Group
-    fields = ['name', 'desc', 'creation_date']
+    fields = ['name', 'desc']
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
@@ -108,7 +108,7 @@ class GroupCreateView(generic.edit.CreateView):
 
 class GroupUpdateView(generic.edit.UpdateView):
     model = Group
-    fields = ['name', 'desc', 'creation_date']
+    fields = ['name', 'desc']
     template_name_suffix = '_update_form'
 
 
@@ -120,7 +120,7 @@ class GroupDeleteView(generic.edit.DeleteView):
 class RecordCreateView(generic.edit.CreateView):
     model = Record
     fields = ['name', 'amount', 'note',
-              'payer', 'receiver', 'creation_date']
+              'payer', 'receiver']
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
@@ -133,7 +133,7 @@ class RecordCreateView(generic.edit.CreateView):
 class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Record
     fields = ['name', 'amount', 'note',
-              'payer', 'receiver', 'creation_date']
+              'payer', 'receiver']
     template_name_suffix = '_update_form'
 
     def get(self, *args, **kwargs):
