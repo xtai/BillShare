@@ -16,38 +16,6 @@ class LoginRequiredMixin(object):
         return decorators.login_required(view)
 
 
-class GroupListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'gates/index.html'
-    context_object_name = 'group_list'
-
-    def get_queryset(self):
-        """
-        Only display current logged in user's groups
-        """
-        return self.request.user.group_set.order_by('-creation_date')
-
-
-class GroupDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Group
-    template_name = 'gates/group.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupDetailView, self).get_context_data(**kwargs)
-        # newer record at first
-        record_set = context['group'].record_set.order_by('-creation_date')
-        context['record_set'] = record_set
-        return context
-
-    def get(self, *args, **kwargs):
-        object = super(GroupDetailView, self).get_object()
-        if self.request.user in object.members.all():
-            # only visiable to mebmers within the group
-            return super(GroupDetailView, self).get(self, *args, **kwargs)
-        else:
-            # throw forbidden for non-member
-            raise Http404()
-
-
 class LoginView(generic.View):
     template_name = 'gates/login.html'
 
@@ -93,6 +61,38 @@ class LogoutView(generic.View):
         if request.user.is_authenticated():
             logout(request)
         return redirect('/accounts/login/')
+
+
+class GroupListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'gates/index.html'
+    context_object_name = 'group_list'
+
+    def get_queryset(self):
+        """
+        Only display current logged in user's groups
+        """
+        return self.request.user.group_set.order_by('-creation_date')
+
+
+class GroupDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Group
+    template_name = 'gates/group.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        # newer record at first
+        record_set = context['group'].record_set.order_by('-creation_date')
+        context['record_set'] = record_set
+        return context
+
+    def get(self, *args, **kwargs):
+        object = super(GroupDetailView, self).get_object()
+        if self.request.user in object.members.all():
+            # only visiable to mebmers within the group
+            return super(GroupDetailView, self).get(self, *args, **kwargs)
+        else:
+            # throw forbidden for non-member
+            raise Http404()
 
 
 class GroupCreateView(generic.edit.CreateView):
