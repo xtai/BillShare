@@ -10,16 +10,16 @@
 <br>full name: {{ user.last_name }}, {{ user.first_name }}
 <br>email: {{ user.email }}</p>
 
-<a href="/project/add/">Create a new project</a>
+<a href="/group/add/">Create a new group</a>
 
-{% if project_list %}
+{% if group_list %}
     <ul>
-    {% for project in project_list %}
-        <li><a href="{% url 'gates:project' project.id %}">{{ project.name }}</a>, <a href="{% url 'gates:project_update' project.id %}">edit</a></li>
+    {% for group in group_list %}
+        <li><a href="{% url 'gates:group' group.id %}">{{ group.name }}</a>, <a href="{% url 'gates:group_update' group.id %}">edit</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No projects are available.</p>
+    <p>No groups are available.</p>
 {% endif %}
 
 <a href="/accounts/logout/">logout</a>

@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Project(models.Model):
+class Group(models.Model):
     name = models.CharField(max_length=100)
     desc = models.CharField(max_length=200)
     members = models.ManyToManyField(User)
@@ -26,7 +26,7 @@ class Record(models.Model):
     (payer is receiver, amount has to be positive) -->
         Payer pay for the project, spilting with entire project.
     """
-    group = models.ForeignKey(Project)
+    group = models.ForeignKey(Group)
     name = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     note = models.CharField(max_length=200, blank=True)

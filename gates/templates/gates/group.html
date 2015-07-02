@@ -2,16 +2,16 @@
 
 <a href="{% url 'gates:index' %}">back</a>
 
-<h2>{{ project.name }}</h2>
-<p>desc: {{ project.desc }}
-<br/>creation_date: {{ project.creation_date }}
-<br/>id: {{ project.id }}
-<br/>members: {{ project.members.all }}</p>
-<p><a href="{% url 'gates:project_delete' project.id %}">delete this project?</a><p/>
-<p><a href="{% url 'gates:record_add' pid=project.id %}">Add a new record</a><p/>
+<h2>{{ group.name }}</h2>
+<p>desc: {{ group.desc }}
+<br/>creation_date: {{ group.creation_date }}
+<br/>id: {{ group.id }}
+<br/>members: {{ group.members.all }}</p>
+<p><a href="{% url 'gates:group_delete' group.id %}">delete this group?</a><p/>
+<p><a href="{% url 'gates:record_add' pid=group.id %}">Add a new record</a><p/>
 {% if not record_set %}
 
-<p>No records avaliable for this project yet.</p>
+<p>No records avaliable for this group yet.</p>
 
 {% else %}
 
@@ -32,13 +32,13 @@
     {% for record in record_set %}
         <tr>
             <th>{{ record.id }}</th>
-            <th><a href="{% url 'gates:record_update' pid=project.id pk=record.id %}">{{ record.name }}</a></th>
+            <th><a href="{% url 'gates:record_update' pid=group.id pk=record.id %}">{{ record.name }}</a></th>
             <td>{{ record.amount }}</td>
             <td>{{ record.payer }}/{{ record.receiver }}</td>
             <td>{{ record.creation_date }}</td>
             <td>{{ record.last_change_date }}</td>
             <td>{{ record.note }}</td>
-            <th><a href="{% url 'gates:record_delete' pid=project.id  pk=record.id %}">delete?</a></th>
+            <th><a href="{% url 'gates:record_delete' pid=group.id  pk=record.id %}">delete?</a></th>
         </tr>
     {% endfor %}
     </tbody>
