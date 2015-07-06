@@ -16,6 +16,10 @@ class Group(models.Model):
     def get_absolute_url(self):
         return reverse('gates:index')
 
+    @staticmethod
+    def get_form_fields():
+        return ['name', 'desc']
+
 
 class Record(models.Model):
     """
@@ -40,3 +44,8 @@ class Record(models.Model):
 
     def get_absolute_url(self):
         return reverse('record-detail', kwargs={'pk': self.pk})
+
+    @staticmethod
+    def get_form_fields():
+        return ['name', 'amount', 'note', 'payer', 'receiver']
+
