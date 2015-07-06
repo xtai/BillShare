@@ -125,7 +125,7 @@ class RecordCreateView(generic.edit.CreateView):
     def form_valid(self, form):
         pid = self.kwargs['pid']
         form.instance.group = self.request.user.group_set.get(pk=pid)
-        self.success_url = '/group/' + str(pid)
+        self.success_url = reverse_lazy('gates:group', kwargs={'pk': pid})
         return super(RecordCreateView, self).form_valid(form)
 
 
@@ -151,7 +151,8 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
             raise Http404()
 
     def form_valid(self, form):
-        self.success_url = '/group/' + str(form.instance.group.pk)
+        groupID = self.get_object().group.pk
+        self.success_url = reverse_lazy('gates:group', kwargs={'pk': groupID})
         return super(RecordUpdateView, self).form_valid(form)
 
 
@@ -169,8 +170,9 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     def post(self, *args, **kwargs):
         # check if the record belongs to the group
         # throw forbidden otherwise
-        if self.kwargs['pid'] == str(self.get_object().group.pk):
-            self.success_url = '/group/' + str(self.kwargs['pid'])
+        groupID = self.get_object().group.pk
+        if self.kwargs['pid'] == str(groupID):
+            self.success_url = reverse_lazy('gates:group', kwargs={'pk': groupID})
             return super(RecordDeleteView, self).post(self, *args, **kwargs)
         else:
             raise Http404()
