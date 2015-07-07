@@ -9,6 +9,7 @@
 <br/>members: {{ group.members.all }}</p>
 <p><a href="{% url 'gates:group_delete' group.id %}">delete this group?</a><p/>
 <p><a href="{% url 'gates:record_add' pid=group.id %}">Add a new record</a><p/>
+
 {% if not record_set %}
 
 <p>No records avaliable for this group yet.</p>
