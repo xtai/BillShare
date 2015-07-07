@@ -95,7 +95,7 @@ class GroupDetailView(LoginRequiredMixin, generic.DetailView):
             raise Http404()
 
 
-class GroupCreateView(generic.edit.CreateView):
+class GroupCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = Group
     fields = Group.get_form_fields()
     template_name_suffix = '_create_form'
@@ -106,18 +106,18 @@ class GroupCreateView(generic.edit.CreateView):
         return r
 
 
-class GroupUpdateView(generic.edit.UpdateView):
+class GroupUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Group
     fields = Group.get_form_fields()
     template_name_suffix = '_update_form'
 
 
-class GroupDeleteView(generic.edit.DeleteView):
+class GroupDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Group
     success_url = reverse_lazy('gates:index')
 
 
-class RecordCreateView(generic.edit.CreateView):
+class RecordCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = Record
     fields = Record.get_form_fields()
     template_name_suffix = '_create_form'
