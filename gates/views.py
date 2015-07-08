@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 # from django.contrib.auth.models import User
-from .models import Project, Record
+from .models import Group, Record
 
 
 class LoginRequiredMixin(object):
@@ -14,38 +14,6 @@ class LoginRequiredMixin(object):
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return decorators.login_required(view)
-
-
-class ProjectListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'gates/index.html'
-    context_object_name = 'project_list'
-
-    def get_queryset(self):
-        """
-        Only display current logged in user's projects
-        """
-        return self.request.user.project_set.order_by('-creation_date')
-
-
-class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Project
-    template_name = 'gates/project.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        # newer record at first
-        record_set = context['project'].record_set.order_by('-creation_date')
-        context['record_set'] = record_set
-        return context
-
-    def get(self, *args, **kwargs):
-        object = super(ProjectDetailView, self).get_object()
-        if self.request.user in object.members.all():
-            # only visiable to mebmers within the project
-            return super(ProjectDetailView, self).get(self, *args, **kwargs)
-        else:
-            # throw forbidden for non-member
-            raise Http404()
 
 
 class LoginView(generic.View):
@@ -95,49 +63,79 @@ class LogoutView(generic.View):
         return redirect('/accounts/login/')
 
 
-class ProjectCreateView(generic.edit.CreateView):
-    model = Project
-    fields = ['name', 'desc', 'creation_date']
+class GroupListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'gates/index.html'
+    context_object_name = 'group_list'
+
+    def get_queryset(self):
+        """
+        Only display current logged in user's groups
+        """
+        return self.request.user.group_set.order_by('-creation_date')
+
+
+class GroupDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Group
+    template_name = 'gates/group.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        # newer record at first
+        record_set = context['group'].record_set.order_by('-creation_date')
+        context['record_set'] = record_set
+        return context
+
+    def get(self, *args, **kwargs):
+        object = super(GroupDetailView, self).get_object()
+        if self.request.user in object.members.all():
+            # only visiable to mebmers within the group
+            return super(GroupDetailView, self).get(self, *args, **kwargs)
+        else:
+            # throw forbidden for non-member
+            raise Http404()
+
+
+class GroupCreateView(LoginRequiredMixin, generic.edit.CreateView):
+    model = Group
+    fields = Group.get_form_fields()
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
-        r = super(ProjectCreateView, self).form_valid(form)
+        r = super(GroupCreateView, self).form_valid(form)
         self.object.members.add(self.request.user)
         return r
 
 
-class ProjectUpdateView(generic.edit.UpdateView):
-    model = Project
-    fields = ['name', 'desc', 'creation_date']
+class GroupUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = Group
+    fields = Group.get_form_fields()
     template_name_suffix = '_update_form'
 
 
-class ProjectDeleteView(generic.edit.DeleteView):
-    model = Project
+class GroupDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = Group
     success_url = reverse_lazy('gates:index')
 
 
-class RecordCreateView(generic.edit.CreateView):
+class RecordCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = Record
-    fields = ['name', 'amount', 'note',
-              'payer', 'receiver', 'creation_date']
+    fields = Record.get_form_fields()
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
         pid = self.kwargs['pid']
-        form.instance.group = self.request.user.project_set.get(pk=pid)
-        self.success_url = '/project/' + str(pid)
+        form.instance.group = self.request.user.group_set.get(pk=pid)
+        self.success_url = reverse_lazy('gates:group', kwargs={'pk': pid})
         return super(RecordCreateView, self).form_valid(form)
 
 
 class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Record
-    fields = ['name', 'amount', 'note',
-              'payer', 'receiver', 'creation_date']
+    fields = Record.get_form_fields()
     template_name_suffix = '_update_form'
 
     def get(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordUpdateView, self).get(self, *args, **kwargs)
@@ -145,7 +143,7 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
             raise Http404()
 
     def post(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordUpdateView, self).post(self, *args, **kwargs)
@@ -153,7 +151,8 @@ class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
             raise Http404()
 
     def form_valid(self, form):
-        self.success_url = '/project/' + str(form.instance.group.pk)
+        groupID = self.get_object().group.pk
+        self.success_url = reverse_lazy('gates:group', kwargs={'pk': groupID})
         return super(RecordUpdateView, self).form_valid(form)
 
 
@@ -161,7 +160,7 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Record
 
     def get(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
         if self.kwargs['pid'] == str(self.get_object().group.pk):
             return super(RecordDeleteView, self).get(self, *args, **kwargs)
@@ -169,10 +168,11 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
             raise Http404()
 
     def post(self, *args, **kwargs):
-        # check if the record belongs to the project
+        # check if the record belongs to the group
         # throw forbidden otherwise
-        if self.kwargs['pid'] == str(self.get_object().group.pk):
-            self.success_url = '/project/' + str(self.kwargs['pid'])
+        groupID = self.get_object().group.pk
+        if self.kwargs['pid'] == str(groupID):
+            self.success_url = reverse_lazy('gates:group', kwargs={'pk': groupID})
             return super(RecordDeleteView, self).post(self, *args, **kwargs)
         else:
             raise Http404()
