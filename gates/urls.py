@@ -16,7 +16,9 @@ urlpatterns = [
         views.LogoutView.as_view(), name='logout'),
 
     # Group model add/update/delete
-    url(r'group/add/$',
+    # @yq0283: Change group add url to 'create',
+    #          otherwise will cause abnormal behavior in admin-end
+    url(r'group/create/$',
         views.GroupCreateView.as_view(), name='group_add'),
     url(r'group/(?P<pk>[0-9]+)/update/$',
         views.GroupUpdateView.as_view(), name='group_update'),

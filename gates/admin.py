@@ -12,7 +12,6 @@ class GroupAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name', 'desc']}),
         ('Members', {'fields': ['members']}),
-        ('Creation Date', {'fields': ['creation_date']}),
     ]
     inlines = [RecordInline]
     list_display = ('name', 'id', 'desc', 'creation_date', 'last_change_date')
