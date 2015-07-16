@@ -20,8 +20,9 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 class RecordAdmin(admin.ModelAdmin):
+    # TODO: fix receiver
     list_display = ('name', 'group', 'id', 'amount', 'note',
-                    'payer', 'receiver', 'creation_date', 'last_change_date')
+                    'payer', 'creation_date', 'last_change_date')
     list_filter = ['creation_date', 'payer', 'receiver']
     search_fields = ['name', 'note']
 
