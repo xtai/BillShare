@@ -36,7 +36,7 @@ class Record(models.Model):
     note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
     receiver = models.ManyToManyField(
-        User, related_name='receiver', through='RecordDetail')
+        User, related_name='receiver', through='gates.models.CostDetail')
     creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
@@ -46,16 +46,12 @@ class Record(models.Model):
     def get_absolute_url(self):
         return reverse('record-detail', kwargs={'pk': self.pk})
 
-    def get_amount(self, user):
-        # TODO: fix
-        pass
-
     @staticmethod
     def get_form_fields():
         return ['name', 'amount', 'note', 'payer', 'receiver']
 
 
-class RecordDetail(models.Model):
+class CostDetail(models.Model):
     record = models.ForeignKey(Record)
     user = models.ForeignKey(User)
     amount = models.DecimalField(max_digits=10, decimal_places=2)

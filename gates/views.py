@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 # from django.contrib.auth.models import User
-from .models import Group, Record, Balance
+from .models import Group, Record, CostDetail, Balance
 
 
 class LoginRequiredMixin(object):
