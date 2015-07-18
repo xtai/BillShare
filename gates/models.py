@@ -21,7 +21,18 @@ class Group(models.Model):
         return ['name', 'desc']
 
 
+class RecordDetail(models.Model):
+    record = models.ForeignKey('Record')
+    user = models.ForeignKey(User)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    @staticmethod
+    def get_form_fields():
+        return ['user', 'amount']
+
+
 class Record(models.Model):
+
     """
     (payer is not receiver, amount is negative) -->
         Payer pay back to receiver.
@@ -35,7 +46,8 @@ class Record(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
-    receiver = models.ForeignKey(User, related_name='receiver')
+    receiver = models.ManyToManyField(
+        User, related_name='receiver', through=RecordDetail)
     creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
@@ -45,7 +57,24 @@ class Record(models.Model):
     def get_absolute_url(self):
         return reverse('record-detail', kwargs={'pk': self.pk})
 
+    def get_amount(self, user):
+        # TODO: fix
+        pass
+
     @staticmethod
     def get_form_fields():
         return ['name', 'amount', 'note', 'payer', 'receiver']
 
+
+class Balance(models.Model):
+
+    """
+    nothing here
+    """
+    group = models.ForeignKey(Group)
+    user = models.ForeignKey(User)
+    balance = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.group.name + " " + self.user.username + " " \
+            + str(self.balance)

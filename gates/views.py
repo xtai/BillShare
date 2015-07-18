@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 # from django.contrib.auth.models import User
-from .models import Group, Record
+from .models import Group, Record, Balance
 
 
 class LoginRequiredMixin(object):
@@ -172,7 +172,8 @@ class RecordDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
         # throw forbidden otherwise
         groupID = self.get_object().group.pk
         if self.kwargs['pid'] == str(groupID):
-            self.success_url = reverse_lazy('gates:group', kwargs={'pk': groupID})
+            self.success_url = reverse_lazy(
+                'gates:group', kwargs={'pk': groupID})
             return super(RecordDeleteView, self).post(self, *args, **kwargs)
         else:
             raise Http404()

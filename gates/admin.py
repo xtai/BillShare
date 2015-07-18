@@ -12,7 +12,6 @@ class GroupAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name', 'desc']}),
         ('Members', {'fields': ['members']}),
-        ('Creation Date', {'fields': ['creation_date']}),
     ]
     inlines = [RecordInline]
     list_display = ('name', 'id', 'desc', 'creation_date', 'last_change_date')
@@ -21,8 +20,9 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 class RecordAdmin(admin.ModelAdmin):
+    # TODO: fix receiver
     list_display = ('name', 'group', 'id', 'amount', 'note',
-                    'payer', 'receiver', 'creation_date', 'last_change_date')
+                    'payer', 'creation_date', 'last_change_date')
     list_filter = ['creation_date', 'payer', 'receiver']
     search_fields = ['name', 'note']
 
