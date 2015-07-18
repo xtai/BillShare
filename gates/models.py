@@ -48,7 +48,7 @@ class Record(models.Model):
 
     @staticmethod
     def get_form_fields():
-        return ['name', 'amount', 'note', 'payer', 'receiver']
+        return ['name', 'amount', 'note', 'payer']
 
 
 class CostDetail(models.Model):

@@ -27,7 +27,7 @@ urlpatterns = [
 
     # Record model add/update/delete
     url(r'group/(?P<pid>[0-9]+)/record/add/$',
-        views.RecordCreateView.as_view(), name='record_add'),
+        views.RecordCreateView, name='record_add'),
     url(r'group/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/$',
         views.RecordUpdateView.as_view(), name='record_update'),
     url(r'group/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/delete/$',

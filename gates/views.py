@@ -1,11 +1,13 @@
 from django.contrib.auth import authenticate, decorators, login, logout
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.views import generic
+from django.template import RequestContext
 
 # from django.contrib.auth.models import User
 from .models import Group, Record, CostDetail, Balance
+from .forms import *
 
 
 class LoginRequiredMixin(object):
@@ -115,16 +117,38 @@ class GroupDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     success_url = reverse_lazy('gates:index')
 
 
-class RecordCreateView(LoginRequiredMixin, generic.edit.CreateView):
-    model = Record
-    fields = Record.get_form_fields()
-    template_name_suffix = '_create_form'
+# class RecordCreateView(LoginRequiredMixin, generic.edit.CreateView):
+#     model = Record
+#     fields = Record.get_form_fields()
+#     template_name_suffix = '_create_form'
+#
+#     def form_valid(self, form):
+#         pid = self.kwargs['pid']
+#         form.instance.group = self.request.user.group_set.get(pk=pid)
+#         self.success_url = reverse_lazy('gates:group', kwargs={'pk': pid})
+#         return super(RecordCreateView, self).form_valid(form)
 
-    def form_valid(self, form):
-        pid = self.kwargs['pid']
-        form.instance.group = self.request.user.group_set.get(pk=pid)
-        self.success_url = reverse_lazy('gates:group', kwargs={'pk': pid})
-        return super(RecordCreateView, self).form_valid(form)
+
+def RecordCreateView(request, pid):
+    record_form = RecordForm(request.POST or None)
+    if request.POST and record_form.is_valid():
+        record = record_form.save(commit=False)
+        costdetail_formset = CostDetailFormSet(request.POST)
+        if costdetail_formset.is_valid():
+            record.save()
+            costdetail_formset.save()
+            return reverse_lazy('gates:group', kwargs={'pk': pid})
+    else:
+        costdetail_formset = CostDetailFormSet(request.POST or None)
+
+    return render_to_response(
+        'gates/record_create_form.html',
+        {
+            'record_form': record_form,
+            'costdetail_formset': costdetail_formset,
+        },
+        context_instance=RequestContext(request),
+    )
 
 
 class RecordUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
