@@ -21,18 +21,7 @@ class Group(models.Model):
         return ['name', 'desc']
 
 
-class RecordDetail(models.Model):
-    record = models.ForeignKey('Record')
-    user = models.ForeignKey(User)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-
-    @staticmethod
-    def get_form_fields():
-        return ['user', 'amount']
-
-
 class Record(models.Model):
-
     """
     (payer is not receiver, amount is negative) -->
         Payer pay back to receiver.
@@ -47,7 +36,7 @@ class Record(models.Model):
     note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
     receiver = models.ManyToManyField(
-        User, related_name='receiver', through=RecordDetail)
+        User, related_name='receiver', through='RecordDetail')
     creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
@@ -66,8 +55,17 @@ class Record(models.Model):
         return ['name', 'amount', 'note', 'payer', 'receiver']
 
 
-class Balance(models.Model):
+class RecordDetail(models.Model):
+    record = models.ForeignKey(Record)
+    user = models.ForeignKey(User)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
 
+    @staticmethod
+    def get_form_fields():
+        return ['user', 'amount']
+
+
+class Balance(models.Model):
     """
     nothing here
     """
@@ -77,4 +75,4 @@ class Balance(models.Model):
 
     def __str__(self):
         return self.group.name + " " + self.user.username + " " \
-            + str(self.balance)
+               + str(self.balance)

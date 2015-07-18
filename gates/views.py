@@ -9,7 +9,6 @@ from .models import Group, Record, Balance
 
 
 class LoginRequiredMixin(object):
-
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
@@ -56,7 +55,6 @@ class LoginView(generic.View):
 
 
 class LogoutView(generic.View):
-
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
             logout(request)
