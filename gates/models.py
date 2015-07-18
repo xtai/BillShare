@@ -36,7 +36,7 @@ class Record(models.Model):
     note = models.CharField(max_length=200, blank=True)
     payer = models.ForeignKey(User, related_name='payer')
     receiver = models.ManyToManyField(
-        User, related_name='receiver', through='gates.models.CostDetail')
+        User, related_name='receiver', through='CostDetail')
     creation_date = models.DateTimeField(auto_now_add=True)
     last_change_date = models.DateTimeField(auto_now=True)
 
