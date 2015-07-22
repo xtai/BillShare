@@ -1,6 +1,8 @@
 from django.conf.urls import url
 
 from . import views
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     # Basic group list and record list
@@ -10,6 +12,12 @@ urlpatterns = [
         views.GroupDetailView.as_view(), name='group'),
 
     # User auth
+    url(r'^accounts/signup/$',
+        CreateView.as_view(
+            template_name='gates/signup.html',
+            form_class=UserCreationForm,
+            success_url='/'
+    )),
     url(r'^accounts/login/$',
         views.LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$',
