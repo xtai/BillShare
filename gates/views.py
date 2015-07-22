@@ -8,6 +8,7 @@ from django.template import RequestContext
 # from django.contrib.auth.models import User
 from .models import Group, Record, CostDetail, Balance
 from .forms import *
+from django.contrib.auth.forms import UserCreationForm
 
 
 class LoginRequiredMixin(object):

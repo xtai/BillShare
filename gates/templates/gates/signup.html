@@ -1,0 +1,59 @@
+{% extends "gates/base.html" %}
+
+{% block title %}Signup - BillShare{% endblock %}
+
+{% block content %}
+<!-- TODO: merge custom CSS -->
+<style type="text/css">
+.signup-textheader h1,
+.signup-textheader h4{
+  font-weight: 200;
+}
+</style>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3" style="padding-top: 60px;">
+    <div class="login-textheader text-center">
+        <h1>BillShare</h1>
+        <h4>Welcome!</h4>
+      </div>
+      <br/>
+    <form method="post" action="/accounts/signup/">{% csrf_token %}
+    {% load i18n widget_tweaks %}
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="form-group has-error">
+                <label class="col-sm-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field|attr:"class:form-control" }}
+                    <span class="help-block">
+                        {% for error in  field.errors %}{{ error }}{% endfor %}
+                    </span>
+                </div>
+            </div>
+        {% else %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field|attr:"class:form-control" }}
+                    {% if field.help_text %}
+                        <p class="help-block"><small>{{ field.help_text }}</small></p>
+                    {% else %}
+                        <p class="help-block"><small></small></p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+        </div>
+    </div>
+    <input type="hidden" name="next" value="" />
+    </form>
+    </div>
+  </div>
+  <hr />
+</div>
+{% endblock %}
