@@ -1,5 +1,8 @@
-{% load staticfiles %}
+{% extends "gates/base.html" %}
 
+{% block title %}BillShare{% endblock %}
+
+{% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <h2>Welcome, {{ user.username }}!</h2>
@@ -23,3 +26,4 @@
 {% endif %}
 
 <a href="/accounts/logout/">logout</a>
+{% endblock %}

@@ -1,13 +1,40 @@
-<h1>Login</h1>
+{% extends "gates/base.html" %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %}Login - BillShare{% endblock %}
 
-<form method="post" action="{% url 'gates:login' %}">
-    {% csrf_token %}
-    <input type="text" name="username" id="username" placeholder="username" />
-    <br />
-    <input type="password" name="password" id="password" placeholder="password" />
-    <br />
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{ next }}" />
-</form>
+{% block content %}
+<!-- TODO: merge custom CSS -->
+<style type="text/css">
+.login-textheader h1,
+.login-textheader h4{
+  font-weight: 200;
+}
+</style>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3" style="padding-top: 60px;">
+    {% if error_message %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Error!</strong> {{ error_message }}
+    </div>
+    {% endif %}
+    <form method="post" action="{% url 'gates:login' %}">
+      {% csrf_token %}
+      <div class="login-textheader text-center">
+        <h1>BillShare</h1>
+        <h4>Welcome back!</h4>
+      </div>
+      <br/>
+      <input type="text" class="form-control input-lg" placeholder="username" name="username" id="username">
+      <div class="input-group input-group-lg" style="padding: 20px 0;">
+        <input type="password" class="form-control" placeholder="secret" name="password" id="password">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="submit" value="login" href="./">&gt;</button>
+        </span>
+      </div>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <hr />
+  </div>
+</div>
+{% endblock %}

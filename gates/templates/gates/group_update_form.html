@@ -1,5 +1,11 @@
+{% extends "gates/base.html" %}
+
+{% block title %}Editing {{ group.name }} - BillShare{% endblock %}
+
+{% block content %}
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update" />
 </form>
 <a href="{% url 'gates:group_delete' group.id %}">delete?</a>
+{% endblock %}

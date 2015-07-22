@@ -1,5 +1,8 @@
-{% load staticfiles %}
+{% extends "gates/base.html" %}
 
+{% block title %}{{ group.name }} - BillShare{% endblock %}
+
+{% block content %}
 <a href="{% url 'gates:index' %}">back</a>
 
 <h2>{{ group.name }}</h2>
@@ -46,3 +49,4 @@
 </table>
 
 {% endif %}
+{% endblock %}

@@ -1,3 +1,8 @@
+{% extends "gates/base.html" %}
+
+{% block title %}Creating a Record - BillShare{% endblock %}
+
+{% block content %}
 <form action="" method="post">{% csrf_token %}
     {{ record_form.as_p }}
     {% for costdetail in costdetail_formset %}
@@ -5,3 +10,4 @@
     {% endfor %}
     <input type="submit" value="Create" />
 </form>
+{% endblock %}

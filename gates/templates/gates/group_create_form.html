@@ -1,4 +1,10 @@
+{% extends "gates/base.html" %}
+
+{% block title %}Creating a Group - BillShare{% endblock %}
+
+{% block content %}
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Create" />
 </form>
+{% endblock %}
