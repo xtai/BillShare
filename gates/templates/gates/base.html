@@ -22,7 +22,11 @@
     <!-- Start of page .container -->
     <div class="container">
       {% block content %}{% endblock %}
-      <p class="text-center footer">© 2015 BillShare. Xiaoyu Tai, Zheng Yan, Yu Qiu.</p>
+      {% block footer %}
+      <footer>
+        <p class="text-center footer">© 2015 BillShare. Xiaoyu Tai, Zheng Yan, Yu Qiu.</p>
+      </footer>
+      {% endblock %}
     </div><!-- /.container -->
     <!-- JS files -->
     <script src="{% static 'gates/assets/js/jquery.min.js' %}"></script>

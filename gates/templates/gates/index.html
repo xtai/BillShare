@@ -3,27 +3,91 @@
 {% block title %}BillShare{% endblock %}
 
 {% block content %}
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<h2>Welcome, {{ user.username }}!</h2>
-
-<p>user: {{ user }}
-<br>id: {{ user.username }}
-<br>username: {{ user.username }}
-<br>full name: {{ user.last_name }}, {{ user.first_name }}
-<br>email: {{ user.email }}</p>
-
-<a href="/group/create/">Create a new group</a>
-
-{% if group_list %}
-    <ul>
-    {% for group in group_list %}
-        <li><a href="{% url 'gates:group' group.id %}">{{ group.name }}</a>, <a href="{% url 'gates:group_update' group.id %}">edit</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No groups are available.</p>
-{% endif %}
-
-<a href="/accounts/logout/">logout</a>
+<!-- TODO: merge custom CSS -->
+<style type="text/css">
+.index-textheader h1,
+.index-textheader h3{
+  font-weight: 200;
+}
+.index-grouplist{
+  padding: 0 5px;
+}
+.index-grouplist .index-group{
+  height: 200px;
+  padding: 10px;
+}
+.index-groupinner{
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #e7e7e7;
+  border-radius: 6px;
+  background-color: rgba(255,255,255,0.75);
+  color: #333;
+}
+.index-groupadd{
+  border: 1px dashed #e7e7e7;
+  color: #666;
+}
+.index-groupinner:hover{
+  background-color: #fafafa;
+}
+.index-groupicon{
+  padding: 15px 0 0;
+  font-size: 40px;
+}
+.index-groupinner > h2{
+  margin: -5px 0 10px;
+  font-weight: 200;
+}
+</style>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    {% if error_message %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Error!</strong> {{ error_message }}
+    </div>
+    {% endif %}
+    <div class="index-textheader">
+      <h3 style="margin: 40px 0 -56px;" class="text-right"><a href="#">{{ user.username }}</a>, <a href="{% url 'gates:logout' %}">logout</a></h3>
+      <h1>BillShare</h1>
+    </div>
+    <hr />
+    <div class="index-grouplist row">
+    {% if group_list %}
+      {% for group in group_list %}
+      <a href="{% url 'gates:group' group.id %}">
+        <div class="index-group col-md-4 col-sm-6">
+          <div class="index-groupinner text-center">
+            <p class="index-groupicon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></p>
+            <h2>{{ group.name }}</h2>
+            <p>{{ group.members.all }}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+      <a href="{% url 'gates:group_add'%}">
+        <div class="index-group col-md-4 col-sm-6">
+          <div class="index-groupinner index-groupadd text-center">
+            <p class="index-groupicon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></p>
+            <h2>New Group?</h2>
+            <p>Create your own group and invite others!</p>
+          </div>
+        </div>
+      </a>
+    {% else %}
+      <a href="{% url 'gates:group_add'%}">
+        <div class="index-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+          <div class="index-groupinner index-groupadd text-center">
+            <p class="index-groupicon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></p>
+            <h2>Create a Group</h2>
+            <p>Create your own group and invite others!</p>
+          </div>
+        </div>
+      </a>
+    {% endif %}
+    </div>
+    <hr />
+  </div>
+</div>
 {% endblock %}
