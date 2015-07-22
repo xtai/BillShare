@@ -17,7 +17,7 @@ urlpatterns = [
             template_name='gates/signup.html',
             form_class=UserCreationForm,
             success_url='/'
-    )),
+        ), name='signup'),
     url(r'^accounts/login/$',
         views.LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$',

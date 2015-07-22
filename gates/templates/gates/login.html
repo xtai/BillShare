@@ -32,6 +32,10 @@
           <button class="btn btn-primary" type="submit" value="login" href="./">&gt;</button>
         </span>
       </div>
+      <div class="login-textheader text-center">
+        <h4>New to BillShare?</h4>
+        <a href="{% url 'gates:signup' %}">Sign up</a>
+      </div>
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
     <hr />
