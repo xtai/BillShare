@@ -33,11 +33,11 @@ urlpatterns = [
     url(r'group/(?P<pk>[0-9]+)/delete/$',
         views.GroupDeleteView.as_view(), name='group_delete'),
 
-    # Record model add/update/delete
-    url(r'group/(?P<pid>[0-9]+)/record/add/$',
-        views.RecordCreateView, name='record_add'),
-    url(r'group/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/$',
-        views.RecordUpdateView.as_view(), name='record_update'),
-    url(r'group/(?P<pid>[0-9]+)/record/(?P<pk>[0-9]+)/delete/$',
-        views.RecordDeleteView.as_view(), name='record_delete'),
+    # Cost model add/update/delete
+    url(r'group/(?P<pid>[0-9]+)/cost/add/$',
+        views.CostCreateView, name='cost_add'),
+    url(r'group/(?P<pid>[0-9]+)/cost/(?P<pk>[0-9]+)/$',
+        views.CostUpdateView.as_view(), name='cost_update'),
+    url(r'group/(?P<pid>[0-9]+)/cost/(?P<pk>[0-9]+)/delete/$',
+        views.CostDeleteView.as_view(), name='cost_delete'),
 ]

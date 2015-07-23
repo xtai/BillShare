@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Group, Record
+from .models import Group, Cost
 
 
-class RecordInline(admin.TabularInline):
-    model = Record
+class CostInline(admin.TabularInline):
+    model = Cost
     extra = 1
 
 
@@ -13,13 +13,13 @@ class GroupAdmin(admin.ModelAdmin):
         (None, {'fields': ['name', 'desc']}),
         ('Members', {'fields': ['members']}),
     ]
-    inlines = [RecordInline]
+    inlines = [CostInline]
     list_display = ('name', 'id', 'desc', 'creation_date', 'last_change_date')
     list_filter = ['creation_date']
     search_fields = ['name', 'desc']
 
 
-class RecordAdmin(admin.ModelAdmin):
+class CostAdmin(admin.ModelAdmin):
     # TODO: fix receiver
     list_display = ('name', 'group', 'id', 'amount', 'note',
                     'payer', 'creation_date', 'last_change_date')
@@ -28,4 +28,4 @@ class RecordAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Group, GroupAdmin)
-admin.site.register(Record, RecordAdmin)
+admin.site.register(Cost, CostAdmin)

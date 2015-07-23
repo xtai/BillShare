@@ -3,10 +3,10 @@ from django.forms.formsets import formset_factory
 from .models import *
 
 
-class RecordForm(forms.ModelForm):
+class CostForm(forms.ModelForm):
     class Meta:
-        model = Record
-        fields = Record.get_form_fields()
+        model = Cost
+        fields = Cost.get_form_fields()
 
 
 class CostDetailForm(forms.ModelForm):
