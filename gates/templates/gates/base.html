@@ -6,20 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
-    <!-- Allow web app to be run in full-screen mode. -->
+    <!-- Allow web app to be run in iOS full-screen mode. -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!-- Static files. -->
+    <!-- CSS files. -->
     <link rel="stylesheet" href="{% static 'gates/assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'gates/assets/css/bootstrap-datetimepicker.min.css' %}">
-    <link rel="stylesheet" href="{% static 'gates/assets/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'gates/assets/css/bill-share.css' %}">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
   <body>
-    <!-- Start of page .container -->
     <div class="container">
       {% block content %}{% endblock %}
       {% block footer %}
@@ -27,11 +25,9 @@
         <p class="text-center footer">© 2015 BillShare. Xiaoyu Tai, Zheng Yan, Yu Qiu.</p>
       </footer>
       {% endblock %}
-    </div><!-- /.container -->
-    <!-- JS files -->
+    </div>
+    <!-- JS files. -->
     <script src="{% static 'gates/assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'gates/assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'gates/assets/js/moment.js' %}"></script>
-    <script src="{% static 'gates/assets/js/bootstrap-datetimepicker.js' %}"></script>
   </body>
 </html>

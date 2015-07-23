@@ -3,28 +3,21 @@
 {% block title %}Sign up - BillShare{% endblock %}
 
 {% block content %}
-<!-- TODO: merge custom CSS -->
-<style type="text/css">
-.signup-textheader h1,
-.signup-textheader h4{
-  font-weight: 200;
-}
-</style>
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3" style="padding-top: 60px;">
+  <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 signup-outterdiv">
     <div class="signup-textheader text-center">
       <h1>BillShare</h1>
       <h4>Welcome!</h4>
+      <hr />
     </div>
-    <br/>
     <form method="post" action="{% url 'gates:signup' %}">
     {% csrf_token %}
     {% load i18n widget_tweaks %}
     {% for field in form %}
       {% if field.errors %}
       <div class="form-group has-error">
-        <label class="col-sm-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
-        <div class="col-sm-10">
+        <label class="control-label signup-formtext" for="id_{{ field.name }}">{{ field.label }}</label>
+        <div>
         {{ field|attr:"class:form-control" }}
           <span class="help-block">
             {% for error in  field.errors %}{{ error }}{% endfor %}
@@ -33,8 +26,8 @@
       </div>
       {% else %}
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
-        <div class="col-sm-10">
+        <label class="control-label signup-formtext" for="id_{{ field.name }}">{{ field.label }}</label>
+        <div>
           {{ field|attr:"class:form-control" }}
           {% if field.help_text %}
             <p class="help-block"><small>{{ field.help_text }}</small></p>
@@ -45,15 +38,18 @@
       </div>
       {% endif %}
     {% endfor %}
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+      <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-primary btn-block">Sign up</button>
         </div>
       </div>
       <input type="hidden" name="next" value="" />
+      <div class="login-textheader text-center">
+        <hr />
+        <h4>Have an account?</h4>
+        <a href="{% url 'gates:login' %}">Log in</a>
+      </div>
     </form>
-    <br style="clear: both;" />
-    <br />
     <hr />
   </div>
 </div>

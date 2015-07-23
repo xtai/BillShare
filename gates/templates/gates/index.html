@@ -3,43 +3,6 @@
 {% block title %}BillShare{% endblock %}
 
 {% block content %}
-<!-- TODO: merge custom CSS -->
-<style type="text/css">
-.index-textheader h1,
-.index-textheader h3{
-  font-weight: 200;
-}
-.index-grouplist{
-  padding: 0 5px;
-}
-.index-grouplist .index-group{
-  height: 200px;
-  padding: 10px;
-}
-.index-groupinner{
-  height: 100%;
-  padding: 10px;
-  border: 1px solid #e7e7e7;
-  border-radius: 6px;
-  background-color: rgba(255,255,255,0.75);
-  color: #333;
-}
-.index-groupadd{
-  border: 1px dashed #e7e7e7;
-  color: #666;
-}
-.index-groupinner:hover{
-  background-color: #fafafa;
-}
-.index-groupicon{
-  padding: 15px 0 0;
-  font-size: 40px;
-}
-.index-groupinner > h2{
-  margin: -5px 0 10px;
-  font-weight: 200;
-}
-</style>
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     {% if error_message %}

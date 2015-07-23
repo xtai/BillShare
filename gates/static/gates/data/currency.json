@@ -1,9 +1,0 @@
-[{
-  "CurrencyID": 0,
-  "Name": "USD",
-  "BasePrice": 1
-}, {
-  "CurrencyID": 1,
-  "Name": "CNY",
-  "BasePrice": 6.2
-}]
