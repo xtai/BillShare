@@ -3,13 +3,6 @@
 {% block title %}My Groups - BillShare{% endblock %}
 
 {% block content %}
-<!-- CSS override -->
-<style type="text/css">
-.global-headcolor{
-  height: 100px;
-  margin: 0 0 -100px;
-}
-</style>
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     {% if error_message %}
@@ -19,8 +12,21 @@
     </div>
     {% endif %}
     <div class="global-textheader">
-      <h3 style="margin: 40px 0 -56px;" class="text-right"><a href="#">{{ user.username }}</a>, <a href="{% url 'gates:logout' %}">logout</a></h3>
-      <h1>BillShare</h1>
+      <div class="global-textheader-left">
+        <h1>BillShare</h1>
+      </div>
+      <div class="global-textheader-right">
+        <div class="dropdown">
+          <a href="#" class="global-avatardiv dropdown-toggle" id="avatarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="global-avatar img-thumbnail">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="avatarDropdown">
+            <li class="dropdown-header">{{ user.first_name }} {{ user.last_name }} (@{{ user.username }})</li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="{% url 'gates:logout' %}">Log out</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="global-navbar">
       <p></p>

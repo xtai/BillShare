@@ -30,5 +30,13 @@
     <!-- JS files. -->
     <script src="{% static 'gates/assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'gates/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'gates/assets/js/gravatar.js' %}"></script>
+    {% if user %}
+    <script type="text/javascript">
+      g = gravatar("{{ user.email }}", {size: 100, backup: "retro"});
+      $(".global-avatar").attr("src", g);
+    </script>
+    {% endif %}
+    {% block extrajs %}{% endblock %}
   </body>
 </html>

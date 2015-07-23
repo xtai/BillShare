@@ -6,7 +6,8 @@ body{
 }
 a,
 .btn,
-.index-groupinner{
+.index-groupinner,
+.index-groupicon{
   transition: all 0.1s;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
@@ -23,12 +24,13 @@ a:focus{
   background: #337ab7;
   color: #fff;
 }
+footer{
+  padding: 50px 0;
+}
 footer > p{
   font-weight: 200;
-  font-size: 12px;
-  line-height: 0.1em;
+  font-size: 14px;
   color: #9f9f9f;
-  padding: 50px 0;
 }
 .global-headcolor{
   width: 100%;
@@ -38,12 +40,34 @@ footer > p{
   border-bottom: 1px solid #e7e7e7;
   z-index: -100;
 }
-.global-textheader > h1,
-.global-textheader > h3,
+.global-textheader h1,
 .global-textheader > h4{
   font-weight: 200;
 }
+.global-textheader{
+  padding: 15px 0 0;
+}
+.global-textheader-left{
+  float: left;
+  margin: 0 0 -2px;
+}
+.global-textheader-right{
+  float: right;
+  padding: 14px 0 0;
+}
+.global-avatardiv{
+  max-width: 50px;
+  height: 50px;
+}
+.global-avatar{
+  width: 50px;
+  height: 50px;
+}
+.global-avatar:hover{
+  border-color: #337ab7;
+}
 .global-navbar{
+  clear: both;
   margin: 0 0 20px; 
 }
 
@@ -63,6 +87,7 @@ footer > p{
 
 /* group-list page aka index */
 .index-grouplist{
+  clear: both;
   padding: 0 5px;
   margin: 60px -15px 30px;
 }
@@ -84,6 +109,10 @@ footer > p{
 }
 .index-groupinner:hover{
   background-color: #f7f7f7;
+  border-color: #337ab7;
+}
+.index-groupinner:hover .index-groupicon{
+  color: #337ab7;
 }
 .index-groupicon{
   padding: 15px 0 0;
@@ -94,3 +123,21 @@ footer > p{
   margin: -5px 0 10px;
   font-weight: 200;
 }
+
+/* group detail aka group.html  */
+.group-navright{
+  margin: 0 0 -20px;
+}
+.group-navdesc{
+  color: #9f9f9f;
+}
+.group-creationdate{
+  color: #9f9f9f;
+  font-weight: 200;
+}
+.group-creationdate b{
+  color: #7f7f7f;
+  font-weight: 200;
+}
+
+
