@@ -3,6 +3,18 @@
 {% block title %}Log in - BillShare{% endblock %}
 
 {% block content %}
+<!-- CSS override -->
+<style type="text/css">
+.global-headcolor{
+  height: 252px;
+  margin: 0 0 -252px;
+  background-color: #337ab7;
+}
+.login-textheader h1,
+.login-textheader h4{
+  color: #fff;
+}
+</style>
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3 login-outterdiv">
     {% if error_message %}
@@ -13,25 +25,26 @@
     {% endif %}
     <form method="post" action="{% url 'gates:login' %}">
       {% csrf_token %}
-      <div class="login-textheader text-center">
+      <div class="login-textheader global-textheader text-center">
         <h1>BillShare</h1>
         <h4>Welcome back!</h4>
       </div>
-      <br/>
+      <br/><br/><br/><br/>
       <input type="text" class="form-control input-lg" placeholder="username" name="username" id="username">
       <div class="input-group input-group-lg login-inputgroup">
         <input type="password" class="form-control" placeholder="secret" name="password" id="password">
         <span class="input-group-btn">
-          <button class="btn btn-primary" type="submit" value="login" href="./">&gt;</button>
+          <button class="btn btn-primary" type="submit" value="login">&gt;</button>
         </span>
       </div>
-      <div class="login-textheader text-center">
+      <hr style="margin: 25px 0 20px;" />
+      <div class="global-textheader text-center">
         <h4>New to BillShare?</h4>
         <a href="{% url 'gates:signup' %}">Sign up</a>
       </div>
+      <hr />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
-    <hr />
   </div>
 </div>
 {% endblock %}

@@ -1,8 +1,15 @@
 {% extends "gates/base.html" %}
 
-{% block title %}BillShare{% endblock %}
+{% block title %}My Groups - BillShare{% endblock %}
 
 {% block content %}
+<!-- CSS override -->
+<style type="text/css">
+.global-headcolor{
+  height: 100px;
+  margin: 0 0 -100px;
+}
+</style>
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     {% if error_message %}
@@ -11,11 +18,13 @@
       <strong>Error!</strong> {{ error_message }}
     </div>
     {% endif %}
-    <div class="index-textheader">
+    <div class="global-textheader">
       <h3 style="margin: 40px 0 -56px;" class="text-right"><a href="#">{{ user.username }}</a>, <a href="{% url 'gates:logout' %}">logout</a></h3>
       <h1>BillShare</h1>
     </div>
-    <hr />
+    <div class="global-navbar">
+      <p></p>
+    </div>
     <div class="index-grouplist row">
     {% if group_list %}
       {% for group in group_list %}
@@ -50,7 +59,6 @@
       </a>
     {% endif %}
     </div>
-    <hr />
   </div>
 </div>
 {% endblock %}
