@@ -1,5 +1,5 @@
 {% extends "gates/base.html" %}
-
+{% load staticfiles %}
 {% block title %}{{ group.name }} - BillShare{% endblock %}
 
 {% block content %}
@@ -31,12 +31,40 @@
     <div class="global-navbar">
       <p><a href="{% url 'gates:index' %}">My Groups</a> / {{ group.name }} <span class="group-navdesc">{{ group.desc }}</span></p>
     </div>
-    <br /><br /><br /><br /><br />
+    <div class="group-copa">
+      <h4>Costs and Payments</h4>
+      <br /><br /><br /><br /><br />
+      <h1 style="font-weight: 200;">TODO: add record, record list.</h1>
+      <h1 style="font-weight: 800;">wait until cost/payment back-end is finished.</h1>
+      <br /><br /><br /><br /><br />
+    </div>
+    <div class="group-memberlist">
+      <h4>Members</h4>
+      <div class="row">
+      {% for member in group.members.all %}
+        <div class="col-xs-3 col-sm-2 group-member">
+          <a href="#" class="thumbnail">
+            <img id="{{ member.id }}-avatar" class="group-members-avatar" src="{% static 'gates/assets/img/avatar-default.png' %}">
+            <div class="caption">
+              <p>{{ member.first_name }}<span class="hidden-xs"> {{ member.last_name }}</span></p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+        <div class="col-xs-3 col-sm-2 group-member">
+          <a href="#" class="thumbnail group-newmember">
+            <img id="{{ member.id }}-avatar" class="group-members-avatar" src="{% static 'gates/assets/img/avatar-add.png' %}">
+            <div class="caption">
+              <p>Invite<span class="hidden-xs"> others</span>?</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="group-manage">
+      <h4>Group Settings</h4>
+    </div>
     <p>(<a href="{% url 'gates:group_update' group.id %}">Edit</a> / <a href="{% url 'gates:group_delete' group.id %}">Delete</a>) this group.</p>
-    <h4>TODO: edit/delete group.</h4>
-    <h4>TODO: member list, with name and avatar.</h4>
-    <h4>TODO: add record, record list. suspended. wait until cost/payment is finished.</h4>
-    <br /><br /><br /><br /><br />
   </div>
 </div>
 
@@ -91,4 +119,12 @@
     <p class="group-creationdate text-center"><b>{{ group.name }}</b> was create on {{ group.creation_date }}</p>
     <p class="text-center">© 2015 BillShare. Xiaoyu Tai, Zheng Yan, Yu Qiu.</p>
   </footer>
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript">
+  {% for member in group.members.all %}
+  var g = gravatar("{{ member.email }}", {size: 278, backup: "retro"});
+  $("#{{ member.id }}-avatar").attr('src', g);
+  {% endfor %}
+</script>
 {% endblock %}

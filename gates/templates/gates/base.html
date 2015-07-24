@@ -33,7 +33,7 @@
     <script src="{% static 'gates/assets/js/gravatar.js' %}"></script>
     {% if user %}
     <script type="text/javascript">
-      g = gravatar("{{ user.email }}", {size: 100, backup: "retro"});
+      var g = gravatar("{{ user.email }}", {size: 100, backup: "retro"});
       $(".global-avatar").attr("src", g);
     </script>
     {% endif %}

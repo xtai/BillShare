@@ -105,13 +105,15 @@ footer > p{
 }
 .index-groupadd{
   border: 1px dashed #e7e7e7;
-  color: #666;
+  color: #9f9f9f;
 }
 .index-groupinner:hover{
   background-color: #f7f7f7;
   border-color: #337ab7;
 }
-.index-groupinner:hover .index-groupicon{
+.index-groupinner:hover > .index-groupicon,
+.index-groupinner:hover > p,
+.index-groupinner:hover > h2{
   color: #337ab7;
 }
 .index-groupicon{
@@ -139,5 +141,26 @@ footer > p{
   color: #7f7f7f;
   font-weight: 200;
 }
-
+.group-memberlist {
+  margin: 0 10px;
+}
+.group-memberlist h4 {
+  margin-left: -10px;
+}
+.group-member {
+  padding: 0 5px;
+}
+.group-member .caption p{
+  margin: -5px -5px -7px;
+  text-align: center;
+}
+.group-member .thumbnail:hover .caption p{
+  color: #337ab7;
+}
+.group-members-avatar{
+  min-height: 100%;
+}
+.group-newmember{
+  border-style: dashed;
+}
 
